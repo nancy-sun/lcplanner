@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { View } from "../Themed";
 import { StyleSheet, TextInput } from "react-native";
 import Checkbox from "../Checkbox/Checkbox";
@@ -11,12 +11,15 @@ interface TaskItemProps {
         deadline: string,
         note: string,
         isCompleted: boolean,
-    }
+    },
+    handleSubmit: () => void
 }
 
-function TaskItem({ task }: TaskItemProps) {
+function TaskItem({ task, handleSubmit }: TaskItemProps) {
     const [checked, setChecked] = useState(false);
     const [title, setTitle] = useState("");
+    const inputRef = useRef<any>(null);
+
 
     useEffect(() => {
         if (!task) return;
@@ -24,10 +27,23 @@ function TaskItem({ task }: TaskItemProps) {
         setTitle(task.title);
     }, [task]);
 
+    useEffect(() => {
+        if (inputRef.current) {
+            console.log(inputRef.current)
+            inputRef.current.focus();
+        }
+    }, [inputRef]);
+
     return (
         <View style={styles.container}>
             <Checkbox isChecked={checked} onPress={() => setChecked(!checked)} />
-            <TextInput multiline style={styles.textInput} value={title} onChangeText={setTitle} />
+            <TextInput multiline blurOnSubmit
+                ref={inputRef}
+                style={styles.textInput}
+                value={title}
+                onChangeText={setTitle}
+                onSubmitEditing={handleSubmit}
+            />
         </View>
     );
 }
