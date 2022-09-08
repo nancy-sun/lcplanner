@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { View } from '../Themed';
-import { StyleSheet, TextInput } from 'react-native';
-import Checkbox from '../Checkbox/Checkbox';
+import React, { useState, useEffect } from "react";
+import { View } from "../Themed";
+import { StyleSheet, TextInput } from "react-native";
+import Checkbox from "../Checkbox/Checkbox";
 
 interface TaskItemProps {
     task: {
