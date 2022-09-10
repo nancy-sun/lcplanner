@@ -41,6 +41,7 @@ const dummyTask = [
 ]
 const dummyID = "300";
 
+/* list of tasks in a day */
 function TaskList() {
     const [tasks, setTasks] = useState(dummyTask);
 
