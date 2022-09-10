@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "../Themed";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import TaskItem from '../TaskItem/TaskItem';
 
@@ -42,9 +42,7 @@ const dummyTask = [
 const dummyID = "300";
 
 function TaskList() {
-
     const [tasks, setTasks] = useState(dummyTask);
-
 
     const addTask = (index: number) => {
         const updatedTasks = [...tasks];
@@ -61,13 +59,19 @@ function TaskList() {
 
     return (
         <View style={styles.container}>
-            <FlatList
-                data={tasks}
-                renderItem={({ item, index }) =>
-                    <TaskItem task={item} handleSubmit={() => addTask(index + 1)} />}
-                style={styles.list}
-            />
-            <Entypo name="add-to-list" style={styles.add} size={22} />
+            <ScrollView>
+                <KeyboardAvoidingView style={{ flex: 1 }}
+                    behavior={"position"}
+                    keyboardVerticalOffset={110}>
+                    <FlatList
+                        data={tasks}
+                        renderItem={({ item, index }) =>
+                            <TaskItem task={item} handleSubmit={() => addTask(index + 1)} />}
+                        style={styles.list}
+                    />
+                    <Entypo name="add-to-list" style={styles.add} size={22} />
+                </KeyboardAvoidingView>
+            </ScrollView>
         </View>
     );
 }

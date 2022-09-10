@@ -29,7 +29,6 @@ function TaskItem({ task, handleSubmit }: TaskItemProps) {
 
     useEffect(() => {
         if (inputRef.current) {
-            console.log(inputRef.current)
             inputRef.current.focus();
         }
     }, [inputRef]);
