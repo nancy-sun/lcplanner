@@ -20,6 +20,11 @@ function TaskItem({ task, handleSubmit }: TaskItemProps) {
     const [title, setTitle] = useState("");
     const inputRef = useRef<any>(null);
 
+    const handleDelete = ({ nativeEvent }: { nativeEvent: any }) => {
+        if (nativeEvent.key === "Backspace" && title === "") {
+            console.log("deleting") // axios call
+        }
+    }
 
     useEffect(() => {
         if (!task) return;
@@ -42,6 +47,7 @@ function TaskItem({ task, handleSubmit }: TaskItemProps) {
                 value={title}
                 onChangeText={setTitle}
                 onSubmitEditing={handleSubmit}
+                onKeyPress={handleDelete}
             />
         </View>
     );
