@@ -1,6 +1,7 @@
-import React from 'react';
-import { View, Text, Pressable } from 'react-native'
+import React from "react";
+import { View, Text, Pressable } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import styles from './UserItemStyles';
 interface UserItemProps {
     user: {
@@ -10,8 +11,13 @@ interface UserItemProps {
 }
 
 function UserItem({ user }: UserItemProps) {
+
+    const navigate = useNavigation();
+
     const handlePress = () => {
-        console.log(`viewing ${user.name} profile`) // to be change to axios call
+        // to be change to axios call
+        // navigate.navigate("UserProfile", {id: user.id});
+        console.log("navigating to friend's profile");
     }
 
     return (
