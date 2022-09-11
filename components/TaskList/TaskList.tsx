@@ -60,8 +60,8 @@ function TaskList() {
     }
 
     return (
-        <View style={styles.container}>
-            <ScrollView>
+        <ScrollView style={styles.container}>
+            <View>
                 <KeyboardAvoidingView style={{ flex: 1 }}
                     behavior={"position"}
                     keyboardVerticalOffset={110}>
@@ -73,8 +73,8 @@ function TaskList() {
                     />
                     <Entypo name="add-to-list" style={styles.add} size={22} />
                 </KeyboardAvoidingView>
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
     );
 }
 
