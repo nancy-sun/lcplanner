@@ -4,7 +4,7 @@ import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import TaskList from '../components/TaskList/TaskList';
 
-function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+function TasksScreen({ navigation }: RootTabScreenProps<'Tasks'>) {
 
     return (
         <View style={styles.container}>
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default TabOneScreen;
+export default TasksScreen;
