@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "row",
         backgroundColor: "#f09a2a",
         marginTop: 14,
     },
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
         fontSize: 21,
         fontWeight: "500",
         color: "white",
+        marginHorizontal: 10,
     },
     signUpButton: {
         height: 39.8,

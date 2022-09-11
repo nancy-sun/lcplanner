@@ -1,10 +1,10 @@
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
-
-
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { GRAPHQL_URI } from '@env';
 
 const client = new ApolloClient({
-    uri: process.env.REACT_APP_GRAPHQL_URI,
+    uri: GRAPHQL_URI,
     cache: new InMemoryCache(),
 });
+
 
 export { client };
