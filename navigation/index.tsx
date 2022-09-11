@@ -18,6 +18,7 @@ import TasksScreen from '../screens/TasksScreen';
 import UsersScreen from '../screens/UsersScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import SplashScreen from '../screens/SplashScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -40,6 +41,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
     return (
         <Stack.Navigator>
+            <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
             <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In' }} />
             <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
