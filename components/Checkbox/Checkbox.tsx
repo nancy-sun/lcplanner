@@ -1,6 +1,7 @@
 import React from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import styles from "./CheckboxStyles";
 
 interface CheckBoxProps {
     isChecked: boolean,
@@ -16,12 +17,5 @@ function Checkbox(props: CheckBoxProps) {
         </Pressable>
     )
 }
-
-const styles = StyleSheet.create({
-    checkbox: {
-        marginTop: 4.5,
-        color: "#f09a2a"
-    },
-});
 
 export default Checkbox;

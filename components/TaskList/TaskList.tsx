@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { View } from "../Themed";
-import { StyleSheet, FlatList, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import { FlatList, KeyboardAvoidingView, ScrollView } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import TaskItem from '../TaskItem/TaskItem';
+import styles from "./TaskListStyles";
 
 /* dummy data for testing */
 const dummyTask = [
@@ -77,18 +78,5 @@ function TaskList() {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        width: "100%"
-    },
-    list: {
-        width: "100%"
-    },
-    add: {
-        color: "#b7b7b7",
-        marginLeft: 4.5,
-        marginTop: 3
-    },
-});
 
 export default TaskList;

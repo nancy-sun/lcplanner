@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { View } from "../Themed";
-import { StyleSheet, TextInput } from "react-native";
+import { TextInput } from "react-native";
 import Checkbox from "../Checkbox/Checkbox";
+import styles from "./TaskItemStyles";
 
 interface TaskItemProps {
     task: {
@@ -52,21 +53,5 @@ function TaskItem({ task, handleSubmit }: TaskItemProps) {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-        marginVertical: 4,
-    },
-    textInput: {
-        flex: 1,
-        flexDirection: "row",
-        // backgroundColor: "#f09a2a",
-        fontSize: 19,
-        marginLeft: 8,
-        padding: 3.5,
-        color: "black",
-    }
-});
 
 export default TaskItem;
