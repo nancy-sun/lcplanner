@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         width: "100%",
         paddingLeft: 2,
         paddingRight: 2,
-        marginVertical: 20,
+        marginVertical: 10,
     },
     username: {
         fontSize: 20,
