@@ -11,7 +11,7 @@ interface UserItemProps {
 
 function UserItem({ user }: UserItemProps) {
     const handlePress = () => {
-
+        console.log(`viewing ${user.name} profile`) // to be change to axios call
     }
 
     return (
