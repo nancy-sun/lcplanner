@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import SignInForm from "../components/SignInForm/SignInForm";
+import SignUpForm from "../components/SignUpForm/SignUpForm";
 
 function SignUpScreen() {
 
     return (
         <View style={styles.container}>
-            <SignInForm />
+            <SignUpForm />
         </View>
     )
 }
