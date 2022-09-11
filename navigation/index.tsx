@@ -17,6 +17,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import TasksScreen from '../screens/TasksScreen';
 import UsersScreen from '../screens/UsersScreen';
 import SignInScreen from '../screens/SignInScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -40,6 +41,7 @@ function RootNavigator() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In' }} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign In' }} />
             <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Screen name="Tasks" component={TasksScreen} />
