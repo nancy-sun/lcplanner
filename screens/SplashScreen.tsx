@@ -1,21 +1,28 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SplashScreen() {
 
     const navigate = useNavigation();
 
-    const isLoggedIn = () => {
-        return false;
+    const isLoggedIn = async () => {
+        const token = await AsyncStorage.getItem("token");
+        console.log(token);
+        return token != null;
     }
 
-    useEffect(() => {
-        if (isLoggedIn()) {
+    const checkLoggedIn = async () => {
+        if (await isLoggedIn()) {
             navigate.navigate("Tasks");
         } else {
             navigate.navigate("SignIn");
         }
+    }
+
+    useEffect(() => {
+        checkLoggedIn();
     }, [])
 
     return (
