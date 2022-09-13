@@ -19,6 +19,7 @@ import UsersScreen from '../screens/UsersScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import SplashScreen from '../screens/SplashScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -41,10 +42,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
     return (
         <Stack.Navigator>
+            <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
             <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
             <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In' }} />
-            <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Screen name="Tasks" component={TasksScreen} />
             <Stack.Screen name="Users" component={UsersScreen} />
@@ -97,6 +98,14 @@ function BottomTabNavigator() {
                 component={UsersScreen}
                 options={{
                     title: 'Users',
+                    tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+                }}
+            />
+            <BottomTab.Screen
+                name="Profile"
+                component={ProfileScreen}
+                options={{
+                    title: 'Profile',
                     tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
                 }}
             />

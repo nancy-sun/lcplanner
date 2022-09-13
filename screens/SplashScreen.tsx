@@ -8,6 +8,7 @@ function SplashScreen() {
     const navigate = useNavigation();
 
     const isLoggedIn = async () => {
+        // await AsyncStorage.removeItem("token"); signout
         const token = await AsyncStorage.getItem("token");
         console.log(token);
         return token != null;
