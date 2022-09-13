@@ -15,10 +15,10 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         borderWidth: 1,
         borderColor: "#b7b7b7",
-        padding: 12,
-        height: 40,
+        paddingLeft: 12,
+        paddingRight: 12,
+        height: 42,
     },
-
     submitButton: {
         height: 40,
         width: "100%",
