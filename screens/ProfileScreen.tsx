@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+
 function ProfileScreen() {
 
     return (
         <View style={styles.container}>
-            <Text>
+            <Text style={styles.avatar}>
+                avatar
+            </Text>
+            <Text style={styles.name}>
                 profile
             </Text>
         </View>
@@ -17,7 +21,18 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 9,
         backgroundColor: "white",
-        width: "100%"
+        alignItems: "center",
+        width: "100%",
+    },
+    avatar: {
+        width: 70,
+        height: 70,
+        backgroundColor: "green",
+    },
+    name: {
+        fontSize: 20,
+        marginTop: 12,
+        fontWeight: "500",
     }
 });
 

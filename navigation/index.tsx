@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Pressable, Button, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -20,6 +20,7 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import SplashScreen from '../screens/SplashScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import SignOutButton from '../components/SignOutButton/SignOutButton';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -43,12 +44,14 @@ function RootNavigator() {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
             <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In' }} />
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Screen name="Tasks" component={TasksScreen} />
             <Stack.Screen name="Users" component={UsersScreen} />
+
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
             </Stack.Group>
@@ -64,6 +67,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
     const colorScheme = useColorScheme();
+
 
     return (
         <BottomTab.Navigator
@@ -106,6 +110,9 @@ function BottomTabNavigator() {
                 component={ProfileScreen}
                 options={{
                     title: 'Profile',
+                    headerRight: () => (
+                        <SignOutButton />
+                    ),
                     tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
                 }}
             />
