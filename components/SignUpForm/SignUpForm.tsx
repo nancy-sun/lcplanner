@@ -40,12 +40,14 @@ function SignUpForm() {
         <View style={styles.container}>
             <TextInput
                 placeholder="username"
+                autoCapitalize="none"
                 value={name}
                 onChangeText={setName}
                 style={styles.input}
             />
             <TextInput
                 placeholder="email"
+                autoCapitalize="none"
                 value={email}
                 onChangeText={setEmail}
                 style={styles.input}
@@ -53,6 +55,7 @@ function SignUpForm() {
             <TextInput
                 secureTextEntry
                 placeholder="password"
+                autoCapitalize="none"
                 value={password}
                 onChangeText={setPassword}
                 style={styles.input}

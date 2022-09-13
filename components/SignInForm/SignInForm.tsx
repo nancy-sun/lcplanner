@@ -38,12 +38,14 @@ function SignInForm() {
         <View style={styles.container}>
             <TextInput
                 placeholder="email"
+                autoCapitalize="none"
                 value={email}
                 onChangeText={setEmail}
                 style={styles.input}
             />
             <TextInput
                 secureTextEntry
+                autoCapitalize="none"
                 placeholder="password"
                 value={password}
                 onChangeText={setPassword}
