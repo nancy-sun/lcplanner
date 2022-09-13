@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Pressable, ActivityIndicator, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
@@ -17,20 +17,24 @@ function SignUpForm() {
 
     const [signUp, { data, error, loading }] = useMutation(SIGN_UP_MUTATION); // mutation[0] function, mutation[1] response object 
 
-
     const handleSubmit = () => {
-        signUp({ variables: { email, name, password } }).then(() => {
-            AsyncStorage.setItem("token", data.signUp.token).then(() => {
+        signUp({ variables: { email, name, password } });
+        if (data) {
+            AsyncStorage.setItem('token', data.signUp.token).then(() => {
                 navigate.navigate("Tasks");
             })
-        }).catch(() => {
-            Alert.alert("Sign up error. Try again.")
-        })
+        }
     }
 
     const redirectToSignIn = () => {
         navigate.navigate("SignIn");
     }
+
+    useEffect(() => {
+        if (error) {
+            Alert.alert('Invalid credentials, try again');
+        }
+    }, [error])
 
     return (
         <View style={styles.container}>
