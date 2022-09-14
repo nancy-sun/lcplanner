@@ -18,6 +18,7 @@ function SignUpForm() {
 
     const handleSubmit = () => {
         signUp({ variables: { email, name, password } });
+        // create tasks list right away after signUp
     }
 
     const redirectToSignIn = () => {
