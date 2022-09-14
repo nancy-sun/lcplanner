@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View } from "../Themed";
 import { ActivityIndicator, Alert, KeyboardAvoidingView, ScrollView, Text } from "react-native";
+import { useMutation, useQuery } from "@apollo/client";
 import { Entypo } from "@expo/vector-icons";
 import TaskItem from '../TaskItem/TaskItem';
 import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
+import { CREATE_TASK_MUTATION } from "../../graphql/mutations";
 import styles from "./TaskListStyles";
-import { useQuery } from "@apollo/client";
 
 /* dummy data for testing */
 const dummyTask = [
@@ -42,30 +43,35 @@ const dummyTask = [
         isCompleted: false,
     }
 ]
-const dummyID = "1";
+const id = "63168c69b4fe6b476cc13398";
 
 /* list of tasks in a day */
 function TaskList() {
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState<any>([]);
 
-    const { data, error, loading } = useQuery(GET_TASK_LIST_QUERY, { variables: { id: "63168c69b4fe6b476cc13398" } });
+    const { data, error, loading } = useQuery(GET_TASK_LIST_QUERY, { variables: { id } });
 
-    const createNewTask = (index: number) => {
-        // const updatedTasks = [...tasks];
-        // updatedTasks.splice(index, 0, {
-        //     id: dummyID,
-        //     title: "",
-        //     date: Date.now().toString(),
-        //     deadline: "",
-        //     note: "",
-        //     isCompleted: false,
-        // })
-        // setTasks(updatedTasks);
+    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION);
+
+    const addNewTask = (index: number) => {
+
+        const newTask = {
+            title: "title",
+            tasksListID: id,
+            date: Date.now(),
+            deadline: "deadline",
+            note: ""
+        };
+
+        createNewTask({
+            variables: newTask
+        });
+        // tasks["tasks"].push(newTask) // to be fixed
     }
 
     useEffect(() => {
         if (data) {
-            setTasks(data.getTaskList);
+            setTasks(data["getTasksList"]);
         }
     }, [data]);
 
@@ -82,9 +88,9 @@ function TaskList() {
                 <KeyboardAvoidingView style={{ flex: 1 }}
                     behavior={"position"}
                     keyboardVerticalOffset={110}>
-                    {/* {loading && <ActivityIndicator color="#f09a2a" />} */}
-                    {tasks && tasks.map((item, index) => <TaskItem key={index} task={item} handleSubmit={() => createNewTask(index + 1)} />)}
-                    <Entypo name="add-to-list" style={styles.add} size={22} />
+                    {loading && <ActivityIndicator color="#f09a2a" />}
+                    {tasks["tasks"] && tasks["tasks"].map((item: { id: String; title: string; date: string; deadline: string; note: string; isCompleted: boolean; }, index: React.Key | null | undefined) => <TaskItem key={index} task={item} handleSubmit={() => addNewTask(Number(index) + 1)} />)}
+                    <Entypo name="add-to-list" style={styles.add} size={22} onPress={() => addNewTask(tasks.length)} />
                 </KeyboardAvoidingView>
             </View>
         </ScrollView>
