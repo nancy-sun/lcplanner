@@ -65,7 +65,7 @@ function TaskList() {
                 <KeyboardAvoidingView style={{ flex: 1 }}
                     behavior={"position"}
                     keyboardVerticalOffset={110}>
-                    {tasks.map((item, index) => <TaskItem task={item} handleSubmit={() => addTask(index + 1)} />)}
+                    {tasks.map((item, index) => <TaskItem key={index} task={item} handleSubmit={() => addTask(index + 1)} />)}
                     <Entypo name="add-to-list" style={styles.add} size={22} />
                 </KeyboardAvoidingView>
             </View>
