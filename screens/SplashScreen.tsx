@@ -9,7 +9,6 @@ function SplashScreen() {
 
     const isLoggedIn = async () => {
         const token = await AsyncStorage.getItem("token");
-        console.log(token);
         return token != null;
     }
 

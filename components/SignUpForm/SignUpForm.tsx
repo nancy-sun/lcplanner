@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 import styles from "./SignUpFormStyles";
 import { SIGN_UP_MUTATION } from "../../graphql/mutations";
-import { GRAPHQL_URI } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignUpForm() {
@@ -19,16 +18,19 @@ function SignUpForm() {
 
     const handleSubmit = () => {
         signUp({ variables: { email, name, password } });
-        if (data) {
-            AsyncStorage.setItem('token', data.signUp.token).then(() => {
-                navigate.navigate("Tasks");
-            })
-        }
     }
 
     const redirectToSignIn = () => {
         navigate.navigate("SignIn");
     }
+
+    useEffect(() => {
+        if (data) {
+            AsyncStorage.setItem('token', data.signUp.token).then(() => {
+                navigate.navigate("Root");
+            })
+        }
+    }, [data])
 
     useEffect(() => {
         if (error) {

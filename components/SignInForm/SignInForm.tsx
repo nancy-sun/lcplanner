@@ -17,16 +17,19 @@ function SignInForm() {
 
     const handleSubmit = () => {
         signIn({ variables: { email, password } });
-        if (data) {
-            AsyncStorage.setItem('token', data.signIn.token).then(() => {
-                navigate.navigate("Tasks");
-            })
-        }
     }
 
     const redirectToSignUp = () => {
         navigate.navigate("SignUp");
     }
+
+    useEffect(() => {
+        if (data) {
+            AsyncStorage.setItem('token', data.signIn.token).then(() => {
+                navigate.navigate("Root");
+            })
+        }
+    }, [data])
 
     useEffect(() => {
         if (error) {

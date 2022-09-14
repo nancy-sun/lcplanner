@@ -13,7 +13,6 @@ function SignOutButton() {
     const handlePress = async () => {
         await AsyncStorage.removeItem("token");
         navigate.navigate("SignIn");
-        console.log("navigating to friend's profile");
     }
 
     return (

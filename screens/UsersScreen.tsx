@@ -6,8 +6,6 @@ import UserList from '../components/UserList/UserList';
 
 export default function UsersScreen() {
 
-
-
     return (
         <View style={styles.container}>
             <UserList />
