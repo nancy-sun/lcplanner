@@ -21,8 +21,6 @@ function SignUpForm() {
     const handleSubmit = async () => {
         await signUp({ variables: { email, name, password } });
         createTasksList();
-        console.log(createTasksListData)
-        console.log(createTasksListError)
         // create tasks list right away after signUp
     }
 

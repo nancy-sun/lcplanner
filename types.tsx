@@ -21,6 +21,7 @@ export type RootStackParamList = {
     Modal: undefined;
     NotFound: undefined;
     Tasks: undefined;
+    ViewOnlyTasks: { id: string };
     Users: undefined;
     Profile: undefined;
 };

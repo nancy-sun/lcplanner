@@ -7,6 +7,7 @@ const TASKS_LIST_QUERY = gql`query MyTasksList {
         progress
         access {
             name
+            id
         }
     }
 }`;

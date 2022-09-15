@@ -23,6 +23,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import SignOutButton from '../components/SignOutButton/SignOutButton';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import ViewOnlyTasksScreen from '../screens/ViewOnlyTasksScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
     return (
@@ -51,6 +52,7 @@ function RootNavigator() {
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Screen name="Tasks" component={TasksScreen} />
             <Stack.Screen name="Users" component={UsersScreen} />
+            <Stack.Screen name="ViewOnlyTasks" component={ViewOnlyTasksScreen} />
 
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
