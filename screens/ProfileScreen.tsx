@@ -1,16 +1,58 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Alert, ActivityIndicator } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import jwt_decode from "jwt-decode";
+import { useQuery } from "@apollo/client";
+import { GET_USER_QUERY } from "../graphql/queries";
 
+interface UserObj {
+    id: string,
+    name: string,
+    email: string,
+    avatar: string
+}
 
 function ProfileScreen() {
 
+    const [userID, setUserID] = useState("");
+    const [username, setUsername] = useState("");
+
+    const { data, error, loading } = useQuery(GET_USER_QUERY, { variables: { id: userID } });
+
+    const getProfile = async () => {
+        const token = await AsyncStorage.getItem("token");
+        if (!token) {
+            return;
+        }
+        const decoded = jwt_decode<UserObj>(token);
+        setUserID(decoded.id);
+    }
+
+    useEffect(() => {
+        getProfile();
+    }, [])
+
+    useEffect(() => {
+        if (data) {
+            setUsername(data["getUser"].name);
+            console.log(data)
+        }
+    }, [data])
+
+    useEffect(() => {
+        if (error) {
+            Alert.alert(`Error fetching user ${error.message}`);
+        }
+    }, [error]);
+
     return (
         <View style={styles.container}>
+            {loading && <ActivityIndicator color="#f09a2a" />}
             <Text style={styles.avatar}>
                 avatar
             </Text>
             <Text style={styles.name}>
-                profile
+                {username}
             </Text>
         </View>
     )

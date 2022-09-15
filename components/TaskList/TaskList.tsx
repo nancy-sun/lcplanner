@@ -8,41 +8,6 @@ import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
 import { CREATE_TASK_MUTATION } from "../../graphql/mutations";
 import styles from "./TaskListStyles";
 
-/* dummy data for testing */
-const dummyTask = [
-    {
-        id: "213",
-        title: "1 two sum",
-        date: "sept 1",
-        deadline: "november",
-        note: "some notes",
-        isCompleted: false,
-    },
-    {
-        id: "214",
-        title: "2 hello",
-        date: "sept 1",
-        deadline: "november",
-        note: "some notes",
-        isCompleted: false,
-    },
-    {
-        id: "215",
-        title: "3 two sum",
-        date: "sept 1",
-        deadline: "november",
-        note: "some notes",
-        isCompleted: false,
-    },
-    {
-        id: "218",
-        title: "4 two sum",
-        date: "sept 1",
-        deadline: "november",
-        note: "some notes",
-        isCompleted: false,
-    }
-]
 const id = "63168c69b4fe6b476cc13398";
 
 /* list of tasks in a day */
