@@ -13,7 +13,7 @@ function UserList() {
 
     useEffect(() => {
         if (data) {
-            setUsers(data.myTasksList);
+            setUsers(data.myTasksList[0].access);
         }
     }, [data])
 

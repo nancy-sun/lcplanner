@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     username: {
         fontSize: 20,
         height: 25,
+        paddingLeft: 5
     },
     iconContainer: {
         width: 25,
