@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 import styles from "./SignUpFormStyles";
 import { SIGN_UP_MUTATION } from "../../graphql/mutations";
+import { CREATE_TASKS_LIST_MUTATION } from "../../graphql/mutations";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignUpForm() {
@@ -15,9 +16,13 @@ function SignUpForm() {
     const navigate = useNavigation();
 
     const [signUp, { data, error, loading }] = useMutation(SIGN_UP_MUTATION); // mutation[0] function, mutation[1] response object 
+    const [createTasksList, { data: createTasksListData, error: createTasksListError }] = useMutation(CREATE_TASKS_LIST_MUTATION); // mutation[0] function, mutation[1] response object 
 
-    const handleSubmit = () => {
-        signUp({ variables: { email, name, password } });
+    const handleSubmit = async () => {
+        await signUp({ variables: { email, name, password } });
+        createTasksList();
+        console.log(createTasksListData)
+        console.log(createTasksListError)
         // create tasks list right away after signUp
     }
 

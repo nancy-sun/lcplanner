@@ -35,7 +35,6 @@ function ProfileScreen() {
     useEffect(() => {
         if (data) {
             setUsername(data["getUser"].name);
-            console.log(data)
         }
     }, [data])
 

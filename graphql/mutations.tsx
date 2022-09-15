@@ -25,6 +25,12 @@ const SIGN_IN_MUTATION = gql`mutation SignIn($email: String!, $password: String!
     }
 }`;
 
+const CREATE_TASKS_LIST_MUTATION = gql`mutation CreateTasksList($recap: String) {
+    createTasksList(recap: $recap) {
+        id
+    }
+}`
+
 const CREATE_TASK_MUTATION = gql`
 mutation CreateTask($title: String!, $tasksListId: ID!, $date: String!, $deadline: String, $note: String) {
     createTask(title: $title, tasksListID: $tasksListId, date: $date, deadline: $deadline, note: $note) {
@@ -39,7 +45,7 @@ mutation CreateTask($title: String!, $tasksListId: ID!, $date: String!, $deadlin
             progress
         }
     }
-}`
+}`;
 
-export { SIGN_UP_MUTATION, SIGN_IN_MUTATION, CREATE_TASK_MUTATION };
+export { SIGN_UP_MUTATION, SIGN_IN_MUTATION, CREATE_TASK_MUTATION, CREATE_TASKS_LIST_MUTATION };
 
