@@ -3,23 +3,52 @@ import { View } from "../Themed";
 import { TextInput } from "react-native";
 import Checkbox from "../Checkbox/Checkbox";
 import styles from "./TaskItemStyles";
+import { useMutation, useQuery } from "@apollo/client";
+import { CREATE_TASK_MUTATION } from "../../graphql/mutations";
+import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
+
 
 interface TaskItemProps {
-    task: {
-        id: String,
-        title: string,
-        date: string,
-        deadline: string,
-        note: string,
-        isCompleted: boolean,
-    },
-    handleSubmit: () => void
+    task: object,
+    // {
+    //     id: String,
+    //     title: string,
+    //     date: string,
+    //     deadline: string,
+    //     note: string,
+    //     isCompleted: boolean,
+    // },
+    id: string,
+    index: number
 }
 
-function TaskItem({ task, handleSubmit }: TaskItemProps) {
+function TaskItem({ task, id, index }: TaskItemProps) {
     const [checked, setChecked] = useState(false);
     const [title, setTitle] = useState("");
     const inputRef = useRef<any>(null);
+
+    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
+
+    const addNewTask = (index: number) => {
+        const newTask = {
+            title: "title",
+            tasksListID: id,
+            date: Date.now(),
+            deadline: "deadline",
+            note: ""
+        };
+
+        createNewTask({
+            variables: {
+                title: "title",
+                tasksListID: id,
+                date: Date.now().toString(),
+                deadline: "deadline",
+                note: "d"
+            }
+        });
+        console.log(createNewTaskError)
+    }
 
     const handleDelete = ({ nativeEvent }: { nativeEvent: any }) => {
         if (nativeEvent.key === "Backspace" && title === "") {
@@ -27,11 +56,11 @@ function TaskItem({ task, handleSubmit }: TaskItemProps) {
         }
     }
 
-    useEffect(() => {
-        if (!task) return;
-        setChecked(task.isCompleted);
-        setTitle(task.title);
-    }, [task]);
+    // useEffect(() => {
+    //     // if (!task) return;
+    //     setChecked(task.isCompleted);
+    //     setTitle(task.title);
+    // }, [task]);
 
     useEffect(() => {
         if (inputRef.current) {
@@ -47,7 +76,7 @@ function TaskItem({ task, handleSubmit }: TaskItemProps) {
                 style={styles.textInput}
                 value={title}
                 onChangeText={setTitle}
-                onSubmitEditing={handleSubmit}
+                onSubmitEditing={() => addNewTask(index)}
                 onKeyPress={handleDelete}
             />
         </View>

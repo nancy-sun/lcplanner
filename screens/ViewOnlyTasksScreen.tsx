@@ -12,7 +12,6 @@ type AppRouteParamList = {
 function ViewOnlyTasksScreen() {
     const route = useRoute<RouteProp<AppRouteParamList, 'user'>>();
     const userID = route.params?.id;
-    console.log(userID)
 
     return (
         <View style={styles.container}>

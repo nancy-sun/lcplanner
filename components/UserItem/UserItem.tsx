@@ -15,10 +15,7 @@ function UserItem({ user }: UserItemProps) {
     const navigate = useNavigation();
 
     const handlePress = () => {
-        // navigate.navigate("UserProfile", {id: user.id});
         navigate.navigate("ViewOnlyTasks", { id: user.id });
-
-        console.log("navigating to friend's profile");
     }
 
     return (
