@@ -27,7 +27,7 @@ function TasksScreen({ navigation }: RootTabScreenProps<'Tasks'>) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>hi</Text>
+            <Text style={styles.title}>{new Date().toDateString()}</Text>
             <TaskList />
         </View>
     );
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         color: "#191919",
+        padding: 6
     },
 
 });
