@@ -14,9 +14,6 @@ const id = "63168c69b4fe6b476cc13398";
 function TaskList() {
     const [tasks, setTasks] = useState<any>([]);
 
-    // const route = useRoute();
-    // const id = route.params.id;
-
     const { data, error, loading } = useQuery(GET_TASK_LIST_QUERY, { variables: { id } });
 
 

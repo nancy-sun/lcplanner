@@ -9,15 +9,14 @@ import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
 
 
 interface TaskItemProps {
-    task: object,
-    // {
-    //     id: String,
-    //     title: string,
-    //     date: string,
-    //     deadline: string,
-    //     note: string,
-    //     isCompleted: boolean,
-    // },
+    task: {
+        id: String,
+        title: string,
+        date: string,
+        deadline: string,
+        note: string,
+        isCompleted: boolean,
+    },
     id: string,
     index: number
 }
@@ -29,25 +28,20 @@ function TaskItem({ task, id, index }: TaskItemProps) {
 
     const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
 
-    const addNewTask = (index: number) => {
+    const addNewTask = () => {
         const newTask = {
-            title: "title",
+            title: title,
             tasksListID: id,
-            date: Date.now(),
-            deadline: "deadline",
+            date: Date.now().toString(),
+            deadline: "",
             note: ""
         };
 
         createNewTask({
-            variables: {
-                title: "title",
-                tasksListID: id,
-                date: Date.now().toString(),
-                deadline: "deadline",
-                note: "d"
-            }
+            variables: newTask
         });
         console.log(createNewTaskError)
+        console.log(createNewTaskData)
     }
 
     const handleDelete = ({ nativeEvent }: { nativeEvent: any }) => {
@@ -57,9 +51,10 @@ function TaskItem({ task, id, index }: TaskItemProps) {
     }
 
     // useEffect(() => {
-    //     // if (!task) return;
+    // if (task){
     //     setChecked(task.isCompleted);
     //     setTitle(task.title);
+    // }
     // }, [task]);
 
     useEffect(() => {
@@ -74,9 +69,9 @@ function TaskItem({ task, id, index }: TaskItemProps) {
             <TextInput multiline blurOnSubmit
                 ref={inputRef}
                 style={styles.textInput}
-                value={title}
+                value={task.title}
                 onChangeText={setTitle}
-                onSubmitEditing={() => addNewTask(index)}
+                onSubmitEditing={() => addNewTask()}
                 onKeyPress={handleDelete}
             />
         </View>
