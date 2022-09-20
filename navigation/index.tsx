@@ -47,8 +47,8 @@ function RootNavigator() {
             <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} options={{ title: 'Sign Up' }} />
-            <Stack.Screen name="SignIn" component={SignInScreen} options={{ title: 'Sign In' }} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Screen name="Tasks" component={TasksScreen} />
             <Stack.Screen name="Users" component={UsersScreen} />
