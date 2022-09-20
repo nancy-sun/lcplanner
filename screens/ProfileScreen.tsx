@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from '@react-navigation/native';
 import jwt_decode from "jwt-decode";
 import { useQuery } from "@apollo/client";
 import { GET_USER_QUERY } from "../graphql/queries";
@@ -19,13 +20,16 @@ function ProfileScreen() {
 
     const { data, error, loading } = useQuery(GET_USER_QUERY, { variables: { id: userID } });
 
+    const navigate = useNavigation();
+
     const getProfile = async () => {
         const token = await AsyncStorage.getItem("token");
         if (!token) {
-            return;
+            navigate.navigate("SignIn");;
+        } else {
+            const decoded = jwt_decode<UserObj>(token);
+            setUserID(decoded.id);
         }
-        const decoded = jwt_decode<UserObj>(token);
-        setUserID(decoded.id);
     }
 
     useEffect(() => {
