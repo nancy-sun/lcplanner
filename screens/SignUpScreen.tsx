@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, KeyboardAvoidingView } from "react-native";
 import SignUpForm from "../components/SignUpForm/SignUpForm";
 
 function SignUpScreen() {
@@ -16,7 +16,11 @@ function SignUpScreen() {
 
     return (
         <View style={styles.container}>
-            <SignUpForm />
+            <KeyboardAvoidingView
+                behavior={"position"}
+                keyboardVerticalOffset={150}>
+                <SignUpForm />
+            </KeyboardAvoidingView>
         </View>
     )
 }

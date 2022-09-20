@@ -35,7 +35,7 @@ function TaskList() {
 
 
     return (
-        <ScrollView style={styles.container} horizontal={false} centerContent={true}>
+        <ScrollView style={styles.container} horizontal={false} >
             <ScrollView style={styles.container} horizontal={true}>
                 <KeyboardAvoidingView
                     style={{ flex: 1 }}
