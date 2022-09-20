@@ -35,25 +35,26 @@ function TaskList() {
 
 
     return (
-        <ScrollView style={styles.container}>
-            <View>
-                <KeyboardAvoidingView style={{ flex: 1 }}
+        <ScrollView style={styles.container} horizontal={false} centerContent={true}>
+            <ScrollView style={styles.container} horizontal={true}>
+                <KeyboardAvoidingView
+                    style={{ flex: 1 }}
                     behavior={"position"}
                     keyboardVerticalOffset={110}>
                     {loading && <ActivityIndicator color="#f09a2a" />}
-                    {tasks && tasks.map(({ item, index }: { item: object, index: number }) => <TaskItem key={index} index={index} task={item} id={id} />)}
-
-                    {/* <FlatList
-                        data={tasks.tasks}
-                        renderItem={({ item, index }) => (
-                            <TaskItem
-                                task={item}
-                                handleSubmit={() => addNewTask(index + 1)}
-                            />
-                        )}
-                    /> */}
+                    {/* {tasks && tasks.map(({ item, index }: { item: object, index: number }) => <TaskItem key={index} index={index} task={item} id={id} />)} */}
+                    <View>
+                        <FlatList
+                            data={tasks}
+                            renderItem={({ item, index }) => (
+                                <TaskItem
+                                    index={index + 1} task={item} id={id}
+                                />
+                            )}
+                        />
+                    </View>
                 </KeyboardAvoidingView>
-            </View>
+            </ScrollView>
         </ScrollView>
     );
 }
