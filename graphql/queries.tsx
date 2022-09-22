@@ -1,13 +1,19 @@
 import { gql } from '@apollo/client';
 
-const TASKS_LIST_QUERY = gql`query MyTasksList {
+const MY_TASKS_LIST_QUERY = gql`query MyTasksList {
     myTasksList {
         id
         recap
         progress
-        access {
-            name
+        owner {
             id
+        }
+        tasks {
+            date
+            title
+            deadline
+            note
+            isCompleted
         }
     }
 }`;
@@ -40,4 +46,4 @@ const GET_USER_QUERY = gql`query GetUser($id: ID!) {
     }
 }`
 
-export { TASKS_LIST_QUERY, GET_TASK_LIST_QUERY, GET_USER_QUERY };
+export { MY_TASKS_LIST_QUERY, GET_TASK_LIST_QUERY, GET_USER_QUERY };

@@ -4,23 +4,19 @@ import { ActivityIndicator, Alert, FlatList, KeyboardAvoidingView, Pressable, Sc
 import { useMutation, useQuery } from "@apollo/client";
 import { Entypo } from "@expo/vector-icons";
 import TaskItem from '../TaskItem/TaskItem';
-import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
+import { MY_TASKS_LIST_QUERY } from "../../graphql/queries";
 import styles from "./TaskListStyles";
 import { RouteProp, useRoute } from "@react-navigation/native";
-
-const id = "63168c69b4fe6b476cc13398";
 
 /* list of tasks in a day */
 function TaskList() {
     const [tasks, setTasks] = useState<any>([]);
 
-    const { data, error, loading } = useQuery(GET_TASK_LIST_QUERY, { variables: { id } });
-
-
+    const { data, error, loading } = useQuery(MY_TASKS_LIST_QUERY);
 
     useEffect(() => {
         if (data) {
-            setTasks(data.getTasksList.tasks);
+            setTasks(data.myTasksList.tasks);
         }
     }, [data]);
 
@@ -45,7 +41,7 @@ function TaskList() {
                             data={tasks}
                             renderItem={({ item, index }) => (
                                 <TaskItem
-                                    index={index + 1} task={item} id={id}
+                                    index={index + 1} task={item} id={tasks.id}
                                 />
                             )}
                         />

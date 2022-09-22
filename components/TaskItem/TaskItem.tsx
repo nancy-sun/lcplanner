@@ -22,6 +22,7 @@ interface TaskItemProps {
 }
 
 function TaskItem({ task, id, index }: TaskItemProps) {
+
     const [checked, setChecked] = useState(false);
     const [title, setTitle] = useState("");
     const inputRef = useRef<any>(null);
