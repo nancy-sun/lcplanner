@@ -44,6 +44,19 @@ const GET_USER_QUERY = gql`query GetUser($id: ID!) {
         email
         avatar
     }
+}`;
+
+const GET_ACCESS_TASKS_LIST_QUERY = gql`query GetAccessTasksList {
+    getAccessTasksList {
+        recap
+        id
+        owner {
+            id
+            name
+            email
+            avatar
+        }
+    }
 }`
 
-export { MY_TASKS_LIST_QUERY, GET_TASK_LIST_QUERY, GET_USER_QUERY };
+export { MY_TASKS_LIST_QUERY, GET_TASK_LIST_QUERY, GET_USER_QUERY, GET_ACCESS_TASKS_LIST_QUERY };

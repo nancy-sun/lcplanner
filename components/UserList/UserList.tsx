@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, View, Alert, ActivityIndicator } from "react-native";
 import { useQuery } from '@apollo/client';
 import UserItem from '../UserItem/UserItem';
-import { TASKS_LIST_QUERY } from '../../graphql/queries';
+import { GET_ACCESS_TASKS_LIST_QUERY } from '../../graphql/queries';
 import styles from './UserListStyles';
 
 function UserList() {
 
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState([]); // list of accessible taskslists
 
-    const { data, error, loading } = useQuery(TASKS_LIST_QUERY);
+    const { data, error, loading } = useQuery(GET_ACCESS_TASKS_LIST_QUERY);
 
     useEffect(() => {
         if (data) {
-            setUsers(data.myTasksList[0].access);
+            setUsers(data.getAccessTasksList);
         }
     }, [data])
 

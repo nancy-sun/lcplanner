@@ -6,7 +6,9 @@ import styles from './UserItemStyles';
 interface UserItemProps {
     user: {
         id: string,
-        name: string
+        owner: {
+            name: String
+        }
     }
 }
 
@@ -24,7 +26,7 @@ function UserItem({ user }: UserItemProps) {
                 <View style={styles.iconContainer}>
                     <FontAwesome name="user" size={24} color="#f09a2a" />
                 </View>
-                <Text style={styles.username}>{user.name}</Text>
+                <Text style={styles.username}>{user.owner.name}</Text>
             </View>
         </Pressable>
     )

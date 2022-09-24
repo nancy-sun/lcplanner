@@ -46,7 +46,4 @@ const styles = StyleSheet.create({
         padding: 14,
     }
 });
-function jwt_decode<T>(token: string) {
-    throw new Error('Function not implemented.');
-}
 

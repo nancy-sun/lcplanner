@@ -19,6 +19,7 @@ export type RootStackParamList = {
     SignUp: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     Modal: undefined;
+    AddFriendModal: undefined;
     NotFound: undefined;
     Tasks: undefined;
     ViewOnlyTasks: { id: string };

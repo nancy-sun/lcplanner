@@ -7,12 +7,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as React from 'react';
+import React, { useState } from 'react';
 import { ColorSchemeName, Pressable, Button, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
+import AddFriendModal from '../components/AddFriendModal/AddFriendModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TasksScreen from '../screens/TasksScreen';
 import UsersScreen from '../screens/UsersScreen';
@@ -21,6 +22,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import SplashScreen from '../screens/SplashScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SignOutButton from '../components/SignOutButton/SignOutButton';
+import AddFriendButton from '../components/AddFriendButton/AddFriendButton';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import ViewOnlyTasksScreen from '../screens/ViewOnlyTasksScreen';
@@ -42,6 +44,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+
     return (
         <Stack.Navigator>
             <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
@@ -56,6 +59,7 @@ function RootNavigator() {
 
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
+                <Stack.Screen name="AddFriendModal" component={AddFriendModal} />
             </Stack.Group>
         </Stack.Navigator>
     );
@@ -69,7 +73,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
     const colorScheme = useColorScheme();
-
+    // const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <BottomTab.Navigator
@@ -104,6 +108,9 @@ function BottomTabNavigator() {
                 component={UsersScreen}
                 options={{
                     title: 'Users',
+                    headerRight: () => (
+                        <AddFriendButton />
+                    ),
                     tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
                 }}
             />

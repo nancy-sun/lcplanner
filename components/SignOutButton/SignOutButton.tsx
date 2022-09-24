@@ -17,7 +17,7 @@ function SignOutButton() {
 
     return (
         <Pressable onPress={handlePress}>
-            <MaterialIcons name="logout" size={27} style={styles.button} />
+            <MaterialIcons name="logout" size={29} style={styles.button} />
         </Pressable>
     )
 }
