@@ -1,18 +1,26 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Alert, StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
 import UserList from '../components/UserList/UserList';
+import AddFriendButton from '../components/AddFriendButton/AddFriendButton';
+import AddFriendModal from "../components/AddFriendModal/AddFriendModal";
 
-interface UserObj {
-    id: string,
-    name: string,
-    email: string,
-    avatar: string
-}
 
-export default function UsersScreen() {
+
+export default function UsersScreen({ navigation }: any) {
+
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <AddFriendButton setModalVisible={setModalVisible} />
+            ),
+        });
+    }, [navigation]);
+
 
     const navigate = useNavigation();
 
@@ -34,6 +42,7 @@ export default function UsersScreen() {
     return (
         <View style={styles.container}>
             <UserList />
+            <AddFriendModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>
     );
 }

@@ -59,7 +59,6 @@ function RootNavigator() {
 
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name="Modal" component={ModalScreen} />
-                <Stack.Screen name="AddFriendModal" component={AddFriendModal} />
             </Stack.Group>
         </Stack.Navigator>
     );
@@ -73,7 +72,6 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
     const colorScheme = useColorScheme();
-    // const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <BottomTab.Navigator
@@ -106,13 +104,13 @@ function BottomTabNavigator() {
             <BottomTab.Screen
                 name="Users"
                 component={UsersScreen}
-                options={{
+                options={({ navigation }) => ({
                     title: 'Users',
-                    headerRight: () => (
-                        <AddFriendButton />
+                    headerRight: (props) => (
+                        <AddFriendButton {...props} />
                     ),
                     tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-                }}
+                })}
             />
             <BottomTab.Screen
                 name="Profile"

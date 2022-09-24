@@ -1,30 +1,60 @@
-import React, { useState } from "react";
-import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { Modal, Text, Pressable, View, TextInput, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import styles from "./AddFriendModalStyles";
 
-function AddFriendModal() {
+interface ModalProps {
+    modalVisible: boolean,
+    setModalVisible: Dispatch<SetStateAction<boolean>>
+}
+
+function AddFriendModal(props: ModalProps) {
+
+    const [email, setEmail] = useState("");
+
+    const handleSubmit = () => {
+        // addFriend({ variables: { email } });
+        console.log("submitting")
+        // if(submitted) props.setModalVisible(false)
+    }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.centeredView}>
             <Modal
                 animationType="fade"
                 transparent={true}
-            // visible={modalVisible}
-            // onRequestClose={() => {
-            //     setModalVisible(!modalVisible);
-            // }}
+                visible={props.modalVisible}
+                onRequestClose={() => {
+                    props.setModalVisible(!props.modalVisible);
+                }}
             >
-                {/* <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text>Hello World!</Text>
-                        <Pressable
-                            // style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}
-                        >
-                            <Text >Hide Modal</Text>
-                        </Pressable>
+                <TouchableOpacity
+                    style={styles.centeredView}
+                    activeOpacity={1}
+                    onPressOut={() => { props.setModalVisible(false) }}
+                >
+                    <View style={styles.centeredView}>
+                        <TouchableWithoutFeedback>
+                            <View style={styles.modalView}>
+                                <Text style={styles.title} >Add Friend</Text>
+                                <TextInput
+                                    placeholder="email"
+                                    autoCapitalize="none"
+                                    value={email}
+                                    onChangeText={setEmail}
+                                    style={styles.input}
+                                />
+                                <Pressable
+                                    style={styles.submitButton}
+                                    onPress={() => handleSubmit()}
+                                >
+                                    <Text style={styles.submitText}>Add</Text>
+                                </Pressable>
+                            </View>
+                        </TouchableWithoutFeedback>
                     </View>
-                </View> */}
+
+                </TouchableOpacity>
+
             </Modal>
         </View>
     );
