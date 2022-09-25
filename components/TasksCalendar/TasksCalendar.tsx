@@ -5,19 +5,16 @@ import styles from "./TasksCalendarStyles";
 
 interface TasksCalendarProps {
     setShowTasks: (day: string) => void,
-
+    showTasks: string,
+    dateMarks: any
 }
 
-function TasksCalendar({ setShowTasks }: TasksCalendarProps) {
-
-    const [today, setToday] = useState<string>("");
-
+function TasksCalendar({ setShowTasks, showTasks, dateMarks }: TasksCalendarProps) {
 
     useEffect(() => {
         let date = new Date();
-        setToday(date.toISOString())
+        setShowTasks(date.toLocaleDateString('en-CA'))
     }, [])
-    console.log(today)
 
     return (
         <View style={styles.container}>
@@ -32,6 +29,10 @@ function TasksCalendar({ setShowTasks }: TasksCalendarProps) {
                 onPressArrowLeft={subtractMonth => subtractMonth()}
                 onPressArrowRight={addMonth => addMonth()}
                 theme={calendarTheme}
+                markedDates={{
+                    [showTasks]: { selected: true },
+                    [dateMarks]: { marked: true }
+                }}
             />
         </View>
     )
@@ -43,22 +44,22 @@ const calendarTheme = {
     calendarBackground: '#ffffff',
     textSectionTitleColor: '#b6c1cd',
     textSectionTitleDisabledColor: '#d9e1e8',
-    selectedDayBackgroundColor: "#f09a2a",
-    selectedDayTextColor: '#ffffff',
+    selectedDayBackgroundColor: "#448f4b",
+    selectedDayTextColor: '#f3f3f3',
     todayTextColor: "#448f4b",
     dayTextColor: '#222222',
     textDisabledColor: '#d9e1e8',
-    dotColor: "#448f4b",
-    selectedDotColor: '#ffffff',
+    dotColor: "#f09a2a",
+    selectedDotColor: "#ffffff",
     disabledArrowColor: '#d9e1e8',
     monthTextColor: "#red",
     indicatorColor: 'blue',
     textDayFontWeight: "300",
     textMonthFontWeight: "bold",
-    textDayHeaderFontWeight: '300',
+    textDayHeaderFontWeight: "400",
     textDayFontSize: 16,
     textMonthFontSize: 20,
-    textDayHeaderFontSize: 16
+    textDayHeaderFontSize: 12
 }
 
 export default TasksCalendar;

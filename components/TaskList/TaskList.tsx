@@ -15,9 +15,22 @@ interface TaskListQueryProps {
 }
 
 function TaskList({ data, loading }: TaskListQueryProps) {
-    const [tasks, setTasks] = useState<any>([]);
+    const [tasks, setTasks] = useState<Array<any>>([]);
 
-    const [showTasks, setShowTasks] = useState("")
+    const [showTasks, setShowTasks] = useState<string>("");
+    const [dateMarks, setDateMarks] = useState<Array<string>>([]);
+
+    const getDateMarks = (tasks: Array<any>) => {
+        const dates = dateMarks;
+        tasks.forEach((task) => {
+            dates.push(task.date);
+        });
+        setDateMarks(dates);
+    }
+
+    useEffect(() => {
+        getDateMarks(tasks);
+    }, [tasks])
 
     useEffect(() => {
         if (data) {
@@ -27,7 +40,8 @@ function TaskList({ data, loading }: TaskListQueryProps) {
 
     return (
         <View style={styles.container}>
-            <TasksCalendar tasks={tasks} setShowTasks={setShowTasks} />
+            <TasksCalendar setShowTasks={setShowTasks} showTasks={showTasks} dateMarks={dateMarks} />
+            {loading && <ActivityIndicator color="#f09a2a" />}
         </View>
     );
 }
