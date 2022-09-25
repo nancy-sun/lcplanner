@@ -13,7 +13,6 @@ import { ColorSchemeName, Pressable, Button, View } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
-import AddFriendModal from '../components/AddFriendModal/AddFriendModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TasksScreen from '../screens/TasksScreen';
 import UsersScreen from '../screens/UsersScreen';
@@ -58,7 +57,7 @@ function RootNavigator() {
             <Stack.Screen name="ViewOnlyTasks" component={ViewOnlyTasksScreen} />
 
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
-                <Stack.Screen name="Modal" component={ModalScreen} />
+                <Stack.Screen name="About" component={ModalScreen} />
             </Stack.Group>
         </Stack.Navigator>
     );
@@ -87,14 +86,14 @@ function BottomTabNavigator() {
                     tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
                     headerLeft: () => (
                         <Pressable
-                            onPress={() => navigation.navigate('Modal')}
+                            onPress={() => navigation.navigate('About')}
                             style={({ pressed }) => ({
                                 opacity: pressed ? 0.5 : 1,
                             })}>
                             <FontAwesome
                                 name="info-circle"
                                 size={25}
-                                color={Colors[colorScheme].text}
+                                color={"#448f4b"}
                                 style={{ marginLeft: 15 }}
                             />
                         </Pressable>
@@ -107,21 +106,48 @@ function BottomTabNavigator() {
             <BottomTab.Screen
                 name="Users"
                 component={UsersScreen}
-                options={{
+                options={({ navigation }: RootTabScreenProps<'Users'>) => ({
                     title: 'Users',
                     tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-                }}
+                    headerLeft: () => (
+                        <Pressable
+                            onPress={() => navigation.navigate('About')}
+                            style={({ pressed }) => ({
+                                opacity: pressed ? 0.5 : 1,
+                            })}>
+                            <FontAwesome
+                                name="info-circle"
+                                size={25}
+                                color={"#448f4b"}
+                                style={{ marginLeft: 15 }}
+                            />
+                        </Pressable>
+                    ),
+                })}
             />
             <BottomTab.Screen
                 name="Profile"
                 component={ProfileScreen}
-                options={{
+                options={({ navigation }: RootTabScreenProps<'Profile'>) => ({
                     title: 'Profile',
                     headerRight: () => (
                         <SignOutButton />
+                    ), headerLeft: () => (
+                        <Pressable
+                            onPress={() => navigation.navigate('About')}
+                            style={({ pressed }) => ({
+                                opacity: pressed ? 0.5 : 1,
+                            })}>
+                            <FontAwesome
+                                name="info-circle"
+                                size={25}
+                                color={"#448f4b"}
+                                style={{ marginLeft: 15 }}
+                            />
+                        </Pressable>
                     ),
                     tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-                }}
+                })}
             />
         </BottomTab.Navigator>
     );
