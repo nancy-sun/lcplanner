@@ -29,7 +29,7 @@ function TaskItem({ task, id, index }: TaskItemProps) {
 
     const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
 
-    const addNewTask = () => {
+    const addNewTask = (atIndex: number) => {
         const newTask = {
             title: title,
             tasksListID: id,
@@ -76,7 +76,7 @@ function TaskItem({ task, id, index }: TaskItemProps) {
                 style={styles.textInput}
                 value={task.title}
                 onChangeText={setTitle}
-                onSubmitEditing={() => addNewTask()}
+                onSubmitEditing={() => addNewTask(index + 1)}
                 onKeyPress={handleDelete}
             />
         </View>

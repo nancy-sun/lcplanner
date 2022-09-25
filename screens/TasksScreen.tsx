@@ -55,7 +55,6 @@ function TasksScreen({ navigation }: RootTabScreenProps<'Tasks'>) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{new Date().toDateString()}</Text>
             <TaskList data={data} loading={loading} />
             <AddFriendModal modalVisible={modalVisible} setModalVisible={setModalVisible} tasksListID={tasksListID} />
         </View>
