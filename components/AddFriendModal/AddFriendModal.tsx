@@ -12,7 +12,7 @@ interface ModalProps {
 
 function AddFriendModal(props: ModalProps) {
 
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState<string>("");
     const [AddTasksListUser, { data, error, loading }] = useMutation(ADD_TASKS_LIST_USER_MUTATION);
 
     const handleSubmit = () => {

@@ -9,9 +9,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignUpForm() {
 
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
     const navigate = useNavigation();
 

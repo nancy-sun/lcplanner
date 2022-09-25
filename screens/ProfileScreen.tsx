@@ -15,8 +15,8 @@ interface UserObj {
 
 function ProfileScreen() {
 
-    const [username, setUsername] = useState("");
-    const [userAvatar, setUserAvatar] = useState("");
+    const [username, setUsername] = useState<string>("");
+    const [userAvatar, setUserAvatar] = useState<string>("");
 
     const [getUser, { data, error, loading }] = useLazyQuery(GET_USER_QUERY);
 

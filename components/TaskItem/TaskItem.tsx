@@ -23,8 +23,8 @@ interface TaskItemProps {
 
 function TaskItem({ task, id, index }: TaskItemProps) {
 
-    const [checked, setChecked] = useState(false);
-    const [title, setTitle] = useState("");
+    const [checked, setChecked] = useState<boolean>(false);
+    const [title, setTitle] = useState<string>("");
     const inputRef = useRef<any>(null);
 
     const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });

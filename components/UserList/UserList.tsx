@@ -14,7 +14,7 @@ import styles from './UserListStyles';
 
 function UserList() {
 
-    const [users, setUsers] = useState([]); // list of accessible taskslists
+    const [users, setUsers] = useState<Array<any>>([]); // list of accessible taskslists
 
     const { data, error, loading } = useQuery(GET_ACCESS_TASKS_LIST_QUERY);
 

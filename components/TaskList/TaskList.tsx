@@ -9,9 +9,12 @@ import styles from "./TaskListStyles";
 import { RouteProp, useRoute } from "@react-navigation/native";
 
 /* list of tasks in a day */
+interface TaskListQueryProps {
+    data: any,
+    loading: boolean
+}
 
-
-function TaskList({ data, error, loading }) {
+function TaskList({ data, loading }: TaskListQueryProps) {
     const [tasks, setTasks] = useState<any>([]);
 
     useEffect(() => {
@@ -19,12 +22,6 @@ function TaskList({ data, error, loading }) {
             setTasks(data.myTasksList.tasks);
         }
     }, [data]);
-
-    useEffect(() => {
-        if (error) {
-            Alert.alert(`Error fetching tasks ${error.message}`);
-        }
-    }, [error]);
 
 
     return (
