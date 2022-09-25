@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { View } from "../Themed";
-import { TextInput } from "react-native";
+import { Alert, TextInput } from "react-native";
 import Checkbox from "../Checkbox/Checkbox";
 import styles from "./TaskItemStyles";
 import { useMutation, useQuery } from "@apollo/client";
@@ -41,8 +41,6 @@ function TaskItem({ task, id, index }: TaskItemProps) {
         createNewTask({
             variables: newTask
         });
-        console.log(createNewTaskError)
-        console.log(createNewTaskData)
     }
 
     const handleDelete = ({ nativeEvent }: { nativeEvent: any }) => {
@@ -57,6 +55,12 @@ function TaskItem({ task, id, index }: TaskItemProps) {
     //     setTitle(task.title);
     // }
     // }, [task]);
+
+    useEffect(() => {
+        if (createNewTaskError) {
+            Alert.alert(createNewTaskError.message);
+        }
+    }, [createNewTaskError])
 
     useEffect(() => {
         if (inputRef.current) {

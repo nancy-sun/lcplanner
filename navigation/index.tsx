@@ -85,7 +85,7 @@ function BottomTabNavigator() {
                 options={({ navigation }: RootTabScreenProps<'Tasks'>) => ({
                     title: 'Tasks',
                     tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-                    headerRight: () => (
+                    headerLeft: () => (
                         <Pressable
                             onPress={() => navigation.navigate('Modal')}
                             style={({ pressed }) => ({
@@ -95,22 +95,22 @@ function BottomTabNavigator() {
                                 name="info-circle"
                                 size={25}
                                 color={Colors[colorScheme].text}
-                                style={{ marginRight: 15 }}
+                                style={{ marginLeft: 15 }}
                             />
                         </Pressable>
+                    ),
+                    headerRight: (props) => (
+                        <AddFriendButton {...props} />
                     ),
                 })}
             />
             <BottomTab.Screen
                 name="Users"
                 component={UsersScreen}
-                options={({ navigation }) => ({
+                options={{
                     title: 'Users',
-                    headerRight: (props) => (
-                        <AddFriendButton {...props} />
-                    ),
                     tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-                })}
+                }}
             />
             <BottomTab.Screen
                 name="Profile"

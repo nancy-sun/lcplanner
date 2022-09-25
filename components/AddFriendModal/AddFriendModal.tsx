@@ -1,21 +1,41 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { Modal, Text, Pressable, View, TextInput, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Modal, Text, Pressable, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Alert } from "react-native";
+import { useMutation } from "@apollo/client";
+import { ADD_TASKS_LIST_USER_MUTATION } from "../../graphql/mutations";
 import styles from "./AddFriendModalStyles";
 
 interface ModalProps {
     modalVisible: boolean,
-    setModalVisible: Dispatch<SetStateAction<boolean>>
+    setModalVisible: Dispatch<SetStateAction<boolean>>,
+    tasksListID: string
 }
 
 function AddFriendModal(props: ModalProps) {
 
     const [email, setEmail] = useState("");
+    const [AddTasksListUser, { data, error, loading }] = useMutation(ADD_TASKS_LIST_USER_MUTATION);
 
     const handleSubmit = () => {
-        // addFriend({ variables: { email } });
-        console.log("submitting")
-        // if(submitted) props.setModalVisible(false)
+        if (!email) {
+            Alert.alert("Please enter email address.");
+        }
+        AddTasksListUser({ variables: { tasksListID: props.tasksListID, userEmail: email } });
     }
+
+    useEffect(() => {
+        if (data) {
+            Alert.alert("Successfully added friend.")
+            props.setModalVisible(false)
+        }
+    }, [data])
+
+    useEffect(() => {
+        if (error) {
+            Alert.alert(error.message);
+        }
+    }, [error])
+
+
 
     return (
         <View style={styles.centeredView}>
@@ -35,13 +55,15 @@ function AddFriendModal(props: ModalProps) {
                     <View style={styles.centeredView}>
                         <TouchableWithoutFeedback>
                             <View style={styles.modalView}>
-                                <Text style={styles.title} >Add Friend</Text>
+                                <Text style={styles.title}>Add Peer</Text>
                                 <TextInput
+                                    autoFocus
                                     placeholder="email"
                                     autoCapitalize="none"
                                     value={email}
                                     onChangeText={setEmail}
                                     style={styles.input}
+                                    keyboardType="email-address"
                                 />
                                 <Pressable
                                     style={styles.submitButton}

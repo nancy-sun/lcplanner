@@ -9,10 +9,10 @@ import styles from "./TaskListStyles";
 import { RouteProp, useRoute } from "@react-navigation/native";
 
 /* list of tasks in a day */
-function TaskList() {
-    const [tasks, setTasks] = useState<any>([]);
 
-    const { data, error, loading } = useQuery(MY_TASKS_LIST_QUERY);
+
+function TaskList({ data, error, loading }) {
+    const [tasks, setTasks] = useState<any>([]);
 
     useEffect(() => {
         if (data) {

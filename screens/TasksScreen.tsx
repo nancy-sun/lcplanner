@@ -1,14 +1,22 @@
-import React, { useEffect } from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { Alert, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TaskList from '../components/TaskList/TaskList';
+import AddFriendButton from "../components/AddFriendButton/AddFriendButton";
+import AddFriendModal from "../components/AddFriendModal/AddFriendModal";
+import { useQuery } from "@apollo/client";
+import { MY_TASKS_LIST_QUERY } from "../graphql/queries";
 
 function TasksScreen({ navigation }: RootTabScreenProps<'Tasks'>) {
 
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [tasksListID, setTasksListID] = useState<string>("");
     const navigate = useNavigation();
+
+    const { data, error, loading } = useQuery(MY_TASKS_LIST_QUERY);
 
     const isLoggedIn = async () => {
         const token = await AsyncStorage.getItem("token");
@@ -21,14 +29,35 @@ function TasksScreen({ navigation }: RootTabScreenProps<'Tasks'>) {
         }
     }
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <AddFriendButton setModalVisible={setModalVisible} />
+            ),
+        });
+    }, [navigation]);
+
     useEffect(() => {
         checkLoggedIn();
     }, [])
 
+    useEffect(() => {
+        if (data) {
+            setTasksListID(data.myTasksList.id);
+        }
+    }, [data])
+
+    useEffect(() => {
+        if (error) {
+            Alert.alert(`Error fetching tasks ${error.message}`);
+        }
+    }, [error])
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{new Date().toDateString()}</Text>
-            <TaskList />
+            <TaskList data={data} loading={loading} />
+            <AddFriendModal modalVisible={modalVisible} setModalVisible={setModalVisible} tasksListID={tasksListID} />
         </View>
     );
 }

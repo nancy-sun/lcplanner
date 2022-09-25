@@ -56,5 +56,13 @@ mutation CreateTask($title: String!, $tasksListID: ID!, $date: String!, $deadlin
     }
 }`;
 
-export { SIGN_UP_MUTATION, SIGN_IN_MUTATION, CREATE_TASK_MUTATION, CREATE_TASKS_LIST_MUTATION };
+// add friend to view own tasks list
+const ADD_TASKS_LIST_USER_MUTATION = gql`
+mutation AddTasksListUser($tasksListID: ID!, $userEmail: String!) {
+    addTasksListUser(tasksListID: $tasksListID, userEmail: $userEmail) {
+        id
+    }
+}`
+
+export { SIGN_UP_MUTATION, SIGN_IN_MUTATION, CREATE_TASK_MUTATION, CREATE_TASKS_LIST_MUTATION, ADD_TASKS_LIST_USER_MUTATION };
 

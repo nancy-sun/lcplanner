@@ -5,11 +5,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22,
         width: "100%"
     },
     modalView: {
         margin: 8,
+        marginBottom: 95,
         width: "90%",
         justifyContent: "space-between",
         height: "25%",
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.4,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
     },
     input: {
         color: "#191919",

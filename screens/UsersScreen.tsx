@@ -11,15 +11,7 @@ import AddFriendModal from "../components/AddFriendModal/AddFriendModal";
 
 export default function UsersScreen({ navigation }: any) {
 
-    const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <AddFriendButton setModalVisible={setModalVisible} />
-            ),
-        });
-    }, [navigation]);
 
 
     const navigate = useNavigation();
@@ -42,7 +34,6 @@ export default function UsersScreen({ navigation }: any) {
     return (
         <View style={styles.container}>
             <UserList />
-            <AddFriendModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>
     );
 }
