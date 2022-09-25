@@ -21,15 +21,14 @@ const SIGN_IN_MUTATION = gql`mutation SignIn($email: String!, $password: String!
             id
             name
             email
+            avatar
         }
     }
 }`;
 
 const CREATE_TASKS_LIST_MUTATION = gql`mutation CreateTasksList($recap: String) {
     createTasksList(recap: $recap) {
-        access {
-            id
-        }   
+        id
     }
 }`
 

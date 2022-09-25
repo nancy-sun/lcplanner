@@ -1,5 +1,16 @@
 import { gql } from '@apollo/client';
 
+// get user info in profile
+const GET_USER_QUERY = gql`query GetUser($id: ID!) {
+    getUser(id: $id) {
+        id
+        name
+        email
+        avatar
+    }
+}`;
+
+// get tasks list owned by user
 const MY_TASKS_LIST_QUERY = gql`query MyTasksList {
     myTasksList {
         id
@@ -18,14 +29,11 @@ const MY_TASKS_LIST_QUERY = gql`query MyTasksList {
     }
 }`;
 
+// get single taskslist by id, to view friend's tasks list
 const GET_TASK_LIST_QUERY = gql`query GetTasksList($id: ID!) {
     getTasksList(id: $id) {
-        id
         recap
-        access {
-            name
-            id
-        }
+        progress
         tasks {
             id
             date
@@ -34,27 +42,29 @@ const GET_TASK_LIST_QUERY = gql`query GetTasksList($id: ID!) {
             deadline
             note
         }
+        owner {
+            name
+        }
     }
 }`;
 
-const GET_USER_QUERY = gql`query GetUser($id: ID!) {
-    getUser(id: $id) {
-        id
-        name
-        email
-        avatar
-    }
-}`;
-
+// get accessible taskslist aka friend list
 const GET_ACCESS_TASKS_LIST_QUERY = gql`query GetAccessTasksList {
     getAccessTasksList {
-        recap
         id
+        recap
+        progress
         owner {
             id
             name
-            email
             avatar
+        }
+        tasks {
+            date
+            isCompleted
+            title
+            deadline
+            note
         }
     }
 }`

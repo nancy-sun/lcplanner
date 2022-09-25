@@ -5,12 +5,12 @@ import UserItem from '../UserItem/UserItem';
 import { GET_ACCESS_TASKS_LIST_QUERY } from '../../graphql/queries';
 import styles from './UserListStyles';
 
-interface UserObj {
-    id: string,
-    name: string,
-    email: string,
-    avatar: string
-}
+// interface UserObj {
+//     id: string,
+//     name: string,
+//     email: string,
+//     avatar: string
+// }
 
 function UserList() {
 

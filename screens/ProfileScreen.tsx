@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from '@react-navigation/native';
 import jwt_decode from "jwt-decode";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { GET_USER_QUERY } from "../graphql/queries";
 
 interface UserObj {
@@ -15,10 +15,10 @@ interface UserObj {
 
 function ProfileScreen() {
 
-    const [userID, setUserID] = useState("");
     const [username, setUsername] = useState("");
+    const [userAvatar, setUserAvatar] = useState("");
 
-    const { data, error, loading } = useQuery(GET_USER_QUERY, { variables: { id: userID } });
+    const [getUser, { data, error, loading }] = useLazyQuery(GET_USER_QUERY);
 
     const navigate = useNavigation();
 
@@ -28,23 +28,25 @@ function ProfileScreen() {
             navigate.navigate("SignIn");;
         } else {
             const decoded = jwt_decode<UserObj>(token);
-            setUserID(decoded.id);
+            getUser({ variables: { id: decoded.id } })
         }
     }
+
+    useEffect(() => {
+        if (data) {
+            setUsername(data.getUser.name);
+            setUserAvatar(data.getUser.avatar);
+        }
+    }, [data])
 
     useEffect(() => {
         getProfile();
     }, [])
 
     useEffect(() => {
-        if (data) {
-            setUsername(data["getUser"].name);
-        }
-    }, [data])
-
-    useEffect(() => {
         if (error) {
             Alert.alert(`Error fetching user ${error.message}`);
+            navigate.navigate("SignIn");;
         }
     }, [error]);
 
