@@ -6,9 +6,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         flex: 1,
         marginTop: 20,
-    },
-    calendar: {
-        width: "100%",
     }
 });
 

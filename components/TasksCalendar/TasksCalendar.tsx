@@ -59,7 +59,7 @@ const calendarTheme = {
     textDayHeaderFontWeight: "400",
     textDayFontSize: 16,
     textMonthFontSize: 20,
-    textDayHeaderFontSize: 12
+    textDayHeaderFontSize: 12,
 }
 
 export default TasksCalendar;
