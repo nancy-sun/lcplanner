@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
         marginLeft: 4.5,
         marginTop: 3
     },
+    tasksList: {
+
+    }
 });
 
 export default styles;

@@ -11,14 +11,14 @@ import TasksCalendar from "../TasksCalendar/TasksCalendar";
 /* list of tasks in a day */
 interface TaskListQueryProps {
     data: any,
-    loading: boolean
+    loading: boolean,
 }
 
 function TaskList({ data, loading }: TaskListQueryProps) {
-    const [tasks, setTasks] = useState<Array<any>>([]);
-
-    const [showTasks, setShowTasks] = useState<string>("");
+    const [tasks, setTasks] = useState<any>([]);
+    const [showTasks, setShowTasks] = useState<string>(""); // selected task date
     const [dateMarks, setDateMarks] = useState<Array<string>>([]);
+    const [showTasksList, setShowTasksList] = useState<Array<any>>([]);
 
     const getDateMarks = (tasks: Array<any>) => {
         const dates = dateMarks;
@@ -26,6 +26,10 @@ function TaskList({ data, loading }: TaskListQueryProps) {
             dates.push(task.date);
         });
         setDateMarks(dates);
+    }
+
+    const getTasksByDate = (tasks: Array<any>) => {
+        return tasks.filter((task) => task.date === showTasks);
     }
 
     useEffect(() => {
@@ -38,10 +42,26 @@ function TaskList({ data, loading }: TaskListQueryProps) {
         }
     }, [data]);
 
+    useEffect(() => {
+        const dailyTasks = getTasksByDate(tasks);
+        dailyTasks.push([]);
+        setShowTasksList(dailyTasks);
+    }, [showTasks])
+
     return (
         <View style={styles.container}>
             <TasksCalendar setShowTasks={setShowTasks} showTasks={showTasks} dateMarks={dateMarks} />
             {loading && <ActivityIndicator color="#f09a2a" />}
+            <View style={styles.tasksList}>
+                <FlatList
+                    data={showTasksList}
+                    renderItem={({ item, index }) => (
+                        <TaskItem
+                            index={index + 1} task={item} id={tasks.id}
+                        />
+                    )}
+                />
+            </View>
         </View>
     );
 }
