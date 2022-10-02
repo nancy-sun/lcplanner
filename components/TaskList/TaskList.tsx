@@ -52,7 +52,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
         <View style={styles.container}>
             <TasksCalendar setShowTasks={setShowTasks} showTasks={showTasks} dateMarks={dateMarks} />
             {loading && <ActivityIndicator color="#f09a2a" />}
-            <View style={styles.tasksList}>
+            <View>
                 <FlatList
                     data={showTasksList}
                     renderItem={({ item, index }) => (

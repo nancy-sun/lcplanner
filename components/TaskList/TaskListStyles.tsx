@@ -10,9 +10,6 @@ const styles = StyleSheet.create({
         color: "#b7b7b7",
         marginLeft: 4.5,
         marginTop: 3
-    },
-    tasksList: {
-        marginTop: 24
     }
 });
 
