@@ -16,6 +16,7 @@ interface TaskListQueryProps {
 
 function TaskList({ data, loading }: TaskListQueryProps) {
     const [tasks, setTasks] = useState<any>([]);
+    const [tasksListID, setTasksListID] = useState<string>("");
     const [showTasks, setShowTasks] = useState<string>(""); // selected task date
     const [dateMarks, setDateMarks] = useState<Array<string>>([]);
     const [showTasksList, setShowTasksList] = useState<Array<any>>([]);
@@ -39,12 +40,14 @@ function TaskList({ data, loading }: TaskListQueryProps) {
     useEffect(() => {
         if (data) {
             setTasks(data.myTasksList.tasks);
+            setTasksListID(data.myTasksList.id);
         }
     }, [data]);
 
     useEffect(() => {
         const dailyTasks = getTasksByDate(tasks);
         dailyTasks.push([]);
+        // console.log(dailyTasks, showTasks);
         setShowTasksList(dailyTasks);
     }, [showTasks])
 
@@ -57,7 +60,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
                     data={showTasksList}
                     renderItem={({ item, index }) => (
                         <TaskItem
-                            index={index + 1} task={item} id={tasks.id}
+                            index={index + 1} task={item} id={tasksListID} tasksDate={showTasks}
                         />
                     )}
                 />

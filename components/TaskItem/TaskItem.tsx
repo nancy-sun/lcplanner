@@ -10,7 +10,7 @@ import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
 
 interface TaskItemProps {
     task: {
-        id: String,
+        id: string,
         title: string,
         date: string,
         deadline: string,
@@ -18,10 +18,11 @@ interface TaskItemProps {
         isCompleted: boolean,
     },
     id: string,
-    index: number
+    index: number,
+    tasksDate: string,
 }
 
-function TaskItem({ task, id, index }: TaskItemProps) {
+function TaskItem({ task, id, index, tasksDate }: TaskItemProps) {
 
     const [checked, setChecked] = useState<boolean>(false);
     const [title, setTitle] = useState<string>("");
@@ -33,7 +34,7 @@ function TaskItem({ task, id, index }: TaskItemProps) {
         const newTask = {
             title: title,
             tasksListID: id,
-            date: Date.now().toString(),
+            date: tasksDate,
             deadline: "",
             note: ""
         };
@@ -45,16 +46,20 @@ function TaskItem({ task, id, index }: TaskItemProps) {
 
     const handleDelete = ({ nativeEvent }: { nativeEvent: any }) => {
         if (nativeEvent.key === "Backspace" && title === "") {
-            console.log("deleting") // axios call
+            console.log("deleting") // use mutation
         }
     }
 
-    // useEffect(() => {
-    // if (task){
-    //     setChecked(task.isCompleted);
-    //     setTitle(task.title);
-    // }
-    // }, [task]);
+    useEffect(() => {
+        if (task.title) {
+            setChecked(task.isCompleted);
+            setTitle(task.title);
+        } else {
+            setTitle("");
+            inputRef.current.clear();
+            inputRef.current.focus();
+        }
+    }, [task]);
 
     useEffect(() => {
         if (createNewTaskError) {
