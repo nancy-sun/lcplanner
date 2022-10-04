@@ -52,7 +52,7 @@ function ProfileScreen() {
 
     return (
         <View style={styles.container}>
-            {loading && <ActivityIndicator color="#f09a2a" />}
+            {loading && <ActivityIndicator color="#F09B2A" />}
             <Text style={styles.avatar}>
                 avatar
             </Text>

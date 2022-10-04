@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#f09a2a",
+        backgroundColor: "#F09B2A",
         marginTop: 14,
     },
     submitText: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         borderWidth: 2,
-        borderColor: "#f09a2a",
+        borderColor: "#F09B2A",
         marginTop: 14,
         marginLeft: 10,
         marginRight: 10,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     signUpText: {
         fontSize: 19.8,
         fontWeight: "500",
-        color: "#f09a2a",
+        color: "#F09B2A",
     }
 });
 

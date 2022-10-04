@@ -32,7 +32,7 @@ function UserList() {
 
     return (
         <View style={styles.container}>
-            {loading && <ActivityIndicator color="#f09a2a" />}
+            {loading && <ActivityIndicator color="#F09B2A" />}
             <FlatList
                 data={users}
                 renderItem={({ item }) =>

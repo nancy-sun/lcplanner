@@ -40,7 +40,7 @@ function TasksCalendar({ setShowTasks, showTasks, dateMarks }: TasksCalendarProp
 
 const calendarTheme = {
     backgroundColor: '#ffffff',
-    arrowColor: "#f09a2a",
+    arrowColor: "#F09B2A",
     calendarBackground: '#ffffff',
     textSectionTitleColor: '#b6c1cd',
     textSectionTitleDisabledColor: '#d9e1e8',
@@ -49,7 +49,7 @@ const calendarTheme = {
     todayTextColor: "#448f4b",
     dayTextColor: '#222222',
     textDisabledColor: '#d9e1e8',
-    dotColor: "#f09a2a",
+    dotColor: "#F09B2A",
     selectedDotColor: "#ffffff",
     disabledArrowColor: '#d9e1e8',
     monthTextColor: "#red",

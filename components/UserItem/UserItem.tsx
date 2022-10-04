@@ -24,7 +24,7 @@ function UserItem({ user }: UserItemProps) {
         <Pressable onPress={handlePress}>
             <View style={styles.container}>
                 <View style={styles.iconContainer}>
-                    <FontAwesome name="user" size={24} color="#f09a2a" />
+                    <FontAwesome name="user" size={24} color="#F09B2A" />
                 </View>
                 <Text style={styles.username}>{user.owner.name}</Text>
             </View>

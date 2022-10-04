@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#f09a2a",
+        backgroundColor: "#F09B2A",
         marginTop: 2
     },
     submitText: {

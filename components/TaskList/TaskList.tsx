@@ -54,7 +54,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
     return (
         <View style={styles.container}>
             <TasksCalendar setShowTasks={setShowTasks} showTasks={showTasks} dateMarks={dateMarks} />
-            {loading && <ActivityIndicator color="#f09a2a" />}
+            {loading && <ActivityIndicator color="#F09B2A" />}
             <View>
                 <FlatList
                     data={showTasksList}
@@ -78,7 +78,7 @@ export default TaskList;
 //         style={{ flex: 1 }}
 //         behavior={"position"}
 //         keyboardVerticalOffset={110}>
-//         {loading && <ActivityIndicator color="#f09a2a" />}
+//         {loading && <ActivityIndicator color="#F09B2A" />}
 //         {/* {tasks && tasks.map(({ item, index }: { item: object, index: number }) => <TaskItem key={index} index={index} task={item} id={id} />)} */}
 //         <View>
 //             <FlatList
