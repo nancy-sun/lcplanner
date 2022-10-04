@@ -4,7 +4,7 @@ import { Alert, TextInput } from "react-native";
 import Checkbox from "../Checkbox/Checkbox";
 import styles from "./TaskItemStyles";
 import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_TASK_MUTATION } from "../../graphql/mutations";
+import { CREATE_TASK_MUTATION, UPDATE_TASK_MUTATION } from "../../graphql/mutations";
 import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
 
 
@@ -30,8 +30,22 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
     const inputRef = useRef<any>(null);
 
     const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
+    const [updateTask, { data, error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
 
-    const addNewTask = (atIndex: number) => {
+    const handleTaskLoad = () => {
+        if (task.title) {
+            setChecked(task.isCompleted);
+            setTitle(task.title);
+        } else {
+            setTitle("");
+            inputRef.current.clear();
+            if (index == lastIdx) {
+                inputRef.current.focus();
+            }
+        }
+    }
+
+    const handleCreateNewTask = (atIndex: number) => {
         const newTask = {
             title: title,
             tasksListID: id,
@@ -51,17 +65,35 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
         }
     }
 
-    useEffect(() => {
-        if (task.title) {
-            setChecked(task.isCompleted);
-            setTitle(task.title);
+    const handleTaskUpdate = () => {
+        const updatedTask = {
+            taskID: task.id,
+            title: title,
+            deadline: "",
+            note: "",
+            isCompleted: checked
+        };
+
+        updateTask({
+            variables: updatedTask
+        })
+    }
+
+    const handleCheckBoxPress = () => {
+        setChecked(!checked);
+        taskHandler();
+    }
+
+    const taskHandler = () => {
+        if (task.id) {
+            handleTaskUpdate();
         } else {
-            setTitle("");
-            inputRef.current.clear();
-            if (index == lastIdx) {
-                inputRef.current.focus();
-            }
+            handleCreateNewTask(index);
         }
+    }
+
+    useEffect(() => {
+        handleTaskLoad();
     }, [task]);
 
     useEffect(() => {
@@ -72,19 +104,32 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
 
     useEffect(() => {
         if (inputRef.current) {
-            inputRef.current.focus();
+            inputRef?.current?.focus();
         }
     }, [inputRef]);
 
+    useEffect(() => {
+        if (data) {
+            console.log(data);
+            handleTaskLoad();
+        }
+    }, [data])
+
+    useEffect(() => {
+        if (error) {
+            console.log(error, "error in edit");
+        }
+    }, [error])
+
     return (
         <View style={styles.container}>
-            <Checkbox isChecked={checked} onPress={() => setChecked(!checked)} />
+            <Checkbox isChecked={checked} onPress={handleCheckBoxPress} />
             <TextInput multiline blurOnSubmit
                 ref={inputRef}
                 style={styles.textInput}
-                value={task.title}
+                value={title}
                 onChangeText={setTitle}
-                onSubmitEditing={() => addNewTask(index + 1)}
+                onSubmitEditing={() => taskHandler()}
                 onKeyPress={handleDelete}
             />
         </View>

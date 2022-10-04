@@ -20,6 +20,7 @@ const MY_TASKS_LIST_QUERY = gql`query MyTasksList {
             id
         }
         tasks {
+            id
             date
             title
             deadline
