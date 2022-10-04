@@ -52,7 +52,6 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
             deadline: "",
             note: ""
         };
-
         createNewTask({
             variables: newTask
         });
@@ -78,6 +77,9 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
     }
 
     const taskHandler = () => {
+        if (title == "") {
+            return;
+        }
         if (task.id) {
             handleTaskUpdate();
         } else {
