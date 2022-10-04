@@ -9,6 +9,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { ColorSchemeName, Pressable, Button, View } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -83,7 +84,7 @@ function BottomTabNavigator() {
                 component={TasksScreen}
                 options={({ navigation }: RootTabScreenProps<'Tasks'>) => ({
                     title: 'Tasks',
-                    tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+                    tabBarIcon: ({ color }) => <FontAwesome5 name="tasks" size={24} color={color} />,
                     headerLeft: () => (
                         <Pressable
                             onPress={() => navigation.navigate('About')}
@@ -108,7 +109,7 @@ function BottomTabNavigator() {
                 component={UsersScreen}
                 options={({ navigation }: RootTabScreenProps<'Users'>) => ({
                     title: 'Users',
-                    tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+                    tabBarIcon: ({ color }) => <FontAwesome5 name="users" size={24} color={color} />,
                     headerLeft: () => (
                         <Pressable
                             onPress={() => navigation.navigate('About')}
@@ -146,7 +147,7 @@ function BottomTabNavigator() {
                             />
                         </Pressable>
                     ),
-                    tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+                    tabBarIcon: ({ color }) => <FontAwesome5 name="house-user" size={24} color={color} />,
                 })}
             />
         </BottomTab.Navigator>
