@@ -7,7 +7,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_TASK_MUTATION, UPDATE_TASK_MUTATION } from "../../graphql/mutations";
 import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
 
-
 interface TaskItemProps {
     task: {
         id: string,
@@ -30,7 +29,7 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
     const inputRef = useRef<any>(null);
 
     const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
-    const [updateTask, { data, error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
+    const [updateTask, { error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
 
     const handleTaskLoad = () => {
         if (task.title) {
@@ -73,15 +72,9 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
             note: "",
             isCompleted: checked
         };
-
         updateTask({
             variables: updatedTask
         })
-    }
-
-    const handleCheckBoxPress = () => {
-        setChecked(!checked);
-        taskHandler();
     }
 
     const taskHandler = () => {
@@ -92,15 +85,17 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
         }
     }
 
+    const handleCheckBoxPress = () => {
+        setChecked(!checked);
+    }
+
     useEffect(() => {
         handleTaskLoad();
     }, [task]);
 
     useEffect(() => {
-        if (createNewTaskError) {
-            Alert.alert(createNewTaskError.message);
-        }
-    }, [createNewTaskError])
+        taskHandler();
+    }, [checked])
 
     useEffect(() => {
         if (inputRef.current) {
@@ -109,15 +104,14 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
     }, [inputRef]);
 
     useEffect(() => {
-        if (data) {
-            console.log(data);
-            handleTaskLoad();
+        if (createNewTaskError) {
+            Alert.alert("fail editing task ", createNewTaskError.message);
         }
-    }, [data])
+    }, [createNewTaskError])
 
     useEffect(() => {
         if (error) {
-            console.log(error, "error in edit");
+            Alert.alert("fail editing task ", error.message);
         }
     }, [error])
 

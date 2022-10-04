@@ -8,9 +8,8 @@ interface CheckBoxProps {
     onPress: () => void
 }
 
-function Checkbox(props: CheckBoxProps) {
-    const name = props.isChecked ? "checkbox-marked-outline" : "checkbox-blank-outline";
-    const { onPress, isChecked } = props;
+function Checkbox({ isChecked, onPress }: CheckBoxProps) {
+    const name = isChecked ? "checkbox-marked-outline" : "checkbox-blank-outline";
     return (
         <Pressable onPress={onPress}>
             <MaterialCommunityIcons name={name} size={24} style={styles.checkbox} />
