@@ -20,9 +20,10 @@ interface TaskItemProps {
     id: string,
     index: number,
     tasksDate: string,
+    lastIdx: number
 }
 
-function TaskItem({ task, id, index, tasksDate }: TaskItemProps) {
+function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
 
     const [checked, setChecked] = useState<boolean>(false);
     const [title, setTitle] = useState<string>("");
@@ -57,7 +58,9 @@ function TaskItem({ task, id, index, tasksDate }: TaskItemProps) {
         } else {
             setTitle("");
             inputRef.current.clear();
-            inputRef.current.focus();
+            if (index == lastIdx) {
+                inputRef.current.focus();
+            }
         }
     }, [task]);
 
