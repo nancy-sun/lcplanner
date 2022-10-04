@@ -3,8 +3,8 @@ import { View } from "../Themed";
 import { Alert, TextInput } from "react-native";
 import Checkbox from "../Checkbox/Checkbox";
 import styles from "./TaskItemStyles";
-import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_TASK_MUTATION, UPDATE_TASK_MUTATION } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
+import { CREATE_TASK_MUTATION, DELETE_TASK_MUTATION, UPDATE_TASK_MUTATION } from "../../graphql/mutations";
 import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
 
 interface TaskItemProps {
@@ -28,8 +28,9 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
     const [title, setTitle] = useState<string>("");
     const inputRef = useRef<any>(null);
 
-    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
     const [updateTask, { error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
+    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
+    const [deleteTask, { data: deleteTaskData, error: deleteTaskError }] = useMutation(DELETE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
 
     const handleTaskLoad = () => {
         if (task.title) {
@@ -58,8 +59,15 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
     }
 
     const handleDelete = ({ nativeEvent }: { nativeEvent: any }) => {
+        if (!task.id) {
+            return;
+        }
         if (nativeEvent.key === "Backspace" && title === "") {
-            console.log("deleting") // use mutation
+            deleteTask({
+                variables: {
+                    id: task.id
+                }
+            })
         }
     }
 
@@ -104,6 +112,12 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
             inputRef?.current?.focus();
         }
     }, [inputRef]);
+
+    useEffect(() => {
+        if (deleteTaskError) {
+            Alert.alert("fail deleting task ", deleteTaskError.message);
+        }
+    }, [deleteTaskError])
 
     useEffect(() => {
         if (createNewTaskError) {
