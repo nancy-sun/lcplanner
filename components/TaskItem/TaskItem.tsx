@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, SyntheticEvent } from "react";
 import { View } from "../Themed";
 import { Alert, TextInput } from "react-native";
 import { useMutation } from "@apollo/client";
@@ -16,22 +16,22 @@ interface TaskItemProps {
         note: string,
         isCompleted: boolean,
     },
-    id: string,
+    tasksListID: string,
     index: number,
     tasksDate: string,
     lastIdx: number,
     showTasksList: any
 }
 
-function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskItemProps) {
+function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList }: TaskItemProps) {
 
     const [checked, setChecked] = useState<boolean>(false);
     const [title, setTitle] = useState<string>("");
     const inputRef = useRef<any>(null);
 
-    const [updateTask, { error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: id } }] });
-    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: id } }] });
-    const [deleteTask, { data: deleteTaskData, error: deleteTaskError }] = useMutation(DELETE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: id } }] });
+    const [updateTask, { data, error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: tasksListID } }] });
+    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: tasksListID } }] });
+    const [deleteTask, { data: deleteTaskData, error: deleteTaskError }] = useMutation(DELETE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: tasksListID } }] });
 
     const handleTaskLoad = () => {
         if (task.title) {
@@ -49,7 +49,7 @@ function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskIt
     const handleCreateNewTask = (atIndex: number) => {
         const newTask = {
             title: title,
-            tasksListID: id,
+            tasksListID: tasksListID,
             date: tasksDate,
             deadline: "",
             note: ""
@@ -70,6 +70,9 @@ function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskIt
                 }
             })
         }
+        // if (nativeEvent.key === "Enter" && title !== "") {
+        //     showTasksList.splice(index + 1, 0, []);
+        // }
     }
 
     const handleTaskUpdate = () => {
@@ -123,6 +126,7 @@ function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskIt
         }
     }, [inputRef]);
 
+    /* error alerts */
     useEffect(() => {
         if (deleteTaskError) {
             Alert.alert("fail deleting task ", deleteTaskError.message);
@@ -144,12 +148,13 @@ function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskIt
     return (
         <View style={styles.container}>
             <Checkbox isChecked={checked} onPress={handleCheckBoxPress} />
-            <TextInput multiline blurOnSubmit
+            <TextInput blurOnSubmit
                 ref={inputRef}
                 style={styles.textInput}
                 value={title}
                 onChangeText={setTitle}
-                onSubmitEditing={() => taskHandler()}
+                onSubmitEditing={taskHandler}
+                onEndEditing={taskHandler}
                 onKeyPress={handleDelete}
             />
         </View>

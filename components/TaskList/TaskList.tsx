@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View } from "../Themed";
-import { ActivityIndicator, Alert, FlatList, KeyboardAvoidingView, Pressable, ScrollView, Text } from "react-native";
+import { ActivityIndicator, Alert, FlatList, KeyboardAvoidingView, Pressable, SafeAreaView, ScrollView, Text } from "react-native";
 import { useMutation, useQuery } from "@apollo/client";
 import { Entypo } from "@expo/vector-icons";
 import TaskItem from '../TaskItem/TaskItem';
@@ -20,6 +20,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
     const [showTasks, setShowTasks] = useState<string>(""); // selected task date
     const [dateMarks, setDateMarks] = useState<Array<string>>([]);
     const [showTasksList, setShowTasksList] = useState<Array<any>>([]);
+    const [lastIdx, setLastIdx] = useState<number>(0);
 
     const getDateMarks = (tasks: Array<any>) => {
         const dates = dateMarks;
@@ -46,22 +47,30 @@ function TaskList({ data, loading }: TaskListQueryProps) {
 
     useEffect(() => {
         const dailyTasks = getTasksByDate(tasks);
-        if (dailyTasks.length != showTasks.length) {
+        if (dailyTasks.length === 0) {
             dailyTasks.push([]);
         }
         setShowTasksList(dailyTasks);
     }, [showTasks])
 
+    useEffect(() => {
+        setLastIdx(showTasksList.length - 1);
+    }, [showTasksList])
+
     return (
         <View style={styles.container}>
             <TasksCalendar setShowTasks={setShowTasks} showTasks={showTasks} dateMarks={dateMarks} />
             {loading && <ActivityIndicator color="#F09B2A" />}
-            <View>
+            <View style={styles.listContainer}>
                 <FlatList
                     data={showTasksList}
+                    initialScrollIndex={lastIdx}
+                    getItemLayout={(data, index) => (
+                        { length: 1, offset: 1 * index, index }
+                    )}
                     renderItem={({ item, index }) => (
                         <TaskItem
-                            index={index} task={item} id={tasksListID} tasksDate={showTasks} lastIdx={showTasksList.length - 1} showTasksList={showTasksList}
+                            index={index} task={item} tasksListID={tasksListID} tasksDate={showTasks} lastIdx={lastIdx} showTasksList={showTasksList}
                         />
                     )}
                 />
