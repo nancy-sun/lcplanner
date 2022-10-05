@@ -47,7 +47,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
 
     useEffect(() => {
         const dailyTasks = getTasksByDate(tasks);
-        if (dailyTasks.length === 0) {
+        if (dailyTasks.length != showTasks.length) {
             dailyTasks.push([]);
         }
         setShowTasksList(dailyTasks);
@@ -64,10 +64,6 @@ function TaskList({ data, loading }: TaskListQueryProps) {
             <View style={styles.listContainer}>
                 <FlatList
                     data={showTasksList}
-                    initialScrollIndex={lastIdx}
-                    getItemLayout={(data, index) => (
-                        { length: 1, offset: 1 * index, index }
-                    )}
                     renderItem={({ item, index }) => (
                         <TaskItem
                             index={index} task={item} tasksListID={tasksListID} tasksDate={showTasks} lastIdx={lastIdx} showTasksList={showTasksList}

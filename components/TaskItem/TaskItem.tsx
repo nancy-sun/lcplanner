@@ -153,8 +153,7 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList 
                 style={styles.textInput}
                 value={title}
                 onChangeText={setTitle}
-                onSubmitEditing={taskHandler}
-                onEndEditing={taskHandler}
+                onSubmitEditing={() => taskHandler()}
                 onKeyPress={handleDelete}
             />
         </View>
