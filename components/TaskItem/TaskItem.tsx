@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { View } from "../Themed";
 import { Alert, TextInput } from "react-native";
-import Checkbox from "../Checkbox/Checkbox";
-import styles from "./TaskItemStyles";
 import { useMutation } from "@apollo/client";
 import { CREATE_TASK_MUTATION, DELETE_TASK_MUTATION, UPDATE_TASK_MUTATION } from "../../graphql/mutations";
 import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
+import Checkbox from "../Checkbox/Checkbox";
+import styles from "./TaskItemStyles";
 
 interface TaskItemProps {
     task: {
