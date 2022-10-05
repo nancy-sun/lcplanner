@@ -46,7 +46,9 @@ function TaskList({ data, loading }: TaskListQueryProps) {
 
     useEffect(() => {
         const dailyTasks = getTasksByDate(tasks);
-        dailyTasks.push([]);
+        if (dailyTasks.length != showTasks.length) {
+            dailyTasks.push([]);
+        }
         setShowTasksList(dailyTasks);
     }, [showTasks])
 

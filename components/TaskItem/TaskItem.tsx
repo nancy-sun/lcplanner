@@ -97,6 +97,14 @@ function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskIt
         showTasksList.push([]);
     }
 
+    const checkTaskHandler = () => {
+        if (title == "" || !task.id) {
+            return;
+        } else {
+            handleTaskUpdate();
+        }
+    }
+
     const handleCheckBoxPress = () => {
         setChecked(!checked);
     }
@@ -106,7 +114,7 @@ function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskIt
     }, [task]);
 
     useEffect(() => {
-        taskHandler();
+        checkTaskHandler();
     }, [checked])
 
     useEffect(() => {
