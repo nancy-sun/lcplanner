@@ -40,7 +40,7 @@ function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskIt
         } else {
             setTitle("");
             inputRef.current.clear();
-            if (index == lastIdx) {
+            if (index === lastIdx) {
                 inputRef.current.focus();
             }
         }
@@ -86,7 +86,7 @@ function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskIt
     }
 
     const taskHandler = () => {
-        if (title == "") {
+        if (title === "") {
             return;
         }
         if (task.id) {
@@ -98,7 +98,7 @@ function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskIt
     }
 
     const checkTaskHandler = () => {
-        if (title == "" || !task.id) {
+        if (title === "" || !task.id) {
             return;
         } else {
             handleTaskUpdate();
