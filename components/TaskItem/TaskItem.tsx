@@ -19,18 +19,19 @@ interface TaskItemProps {
     id: string,
     index: number,
     tasksDate: string,
-    lastIdx: number
+    lastIdx: number,
+    showTasksList: any
 }
 
-function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
+function TaskItem({ task, id, index, tasksDate, lastIdx, showTasksList }: TaskItemProps) {
 
     const [checked, setChecked] = useState<boolean>(false);
     const [title, setTitle] = useState<string>("");
     const inputRef = useRef<any>(null);
 
-    const [updateTask, { error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
-    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
-    const [deleteTask, { data: deleteTaskData, error: deleteTaskError }] = useMutation(DELETE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY }] });
+    const [updateTask, { error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: id } }] });
+    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: id } }] });
+    const [deleteTask, { data: deleteTaskData, error: deleteTaskError }] = useMutation(DELETE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: id } }] });
 
     const handleTaskLoad = () => {
         if (task.title) {
@@ -93,6 +94,7 @@ function TaskItem({ task, id, index, tasksDate, lastIdx }: TaskItemProps) {
         } else {
             handleCreateNewTask(index);
         }
+        showTasksList.push([]);
     }
 
     const handleCheckBoxPress = () => {

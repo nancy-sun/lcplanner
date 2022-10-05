@@ -47,7 +47,6 @@ function TaskList({ data, loading }: TaskListQueryProps) {
     useEffect(() => {
         const dailyTasks = getTasksByDate(tasks);
         dailyTasks.push([]);
-        // console.log(dailyTasks, showTasks);
         setShowTasksList(dailyTasks);
     }, [showTasks])
 
@@ -60,7 +59,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
                     data={showTasksList}
                     renderItem={({ item, index }) => (
                         <TaskItem
-                            index={index} task={item} id={tasksListID} tasksDate={showTasks} lastIdx={showTasksList.length - 1}
+                            index={index} task={item} id={tasksListID} tasksDate={showTasks} lastIdx={showTasksList.length - 1} showTasksList={showTasksList}
                         />
                     )}
                 />
