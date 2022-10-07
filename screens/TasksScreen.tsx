@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Alert, StyleSheet } from "react-native";
+import { Alert, KeyboardAvoidingView, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import { useNavigation } from '@react-navigation/native';
@@ -55,9 +55,15 @@ function TasksScreen({ navigation }: RootTabScreenProps<'Tasks'>) {
 
     return (
         <View style={styles.container}>
-            <TaskList data={data} loading={loading} />
-            <AddFriendModal modalVisible={modalVisible} setModalVisible={setModalVisible} tasksListID={tasksListID} />
-        </View>
+            <KeyboardAvoidingView
+                behavior={"position"}
+                keyboardVerticalOffset={15}
+                style={styles.keyboardAvoid}
+            >
+                <TaskList data={data} loading={loading} />
+                <AddFriendModal modalVisible={modalVisible} setModalVisible={setModalVisible} tasksListID={tasksListID} />
+            </KeyboardAvoidingView >
+        </View >
     );
 }
 
@@ -66,6 +72,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         padding: 10,
+        width: "100%",
+    },
+    keyboardAvoid: {
+        flex: 1,
+        minWidth: "100%"
     },
     title: {
         fontSize: 20,
