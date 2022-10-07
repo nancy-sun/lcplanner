@@ -46,7 +46,7 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList 
         }
     }
 
-    const handleCreateNewTask = (atIndex: number) => {
+    const handleCreateNewTask = () => {
         const newTask = {
             title: title,
             tasksListID: tasksListID,
@@ -70,9 +70,6 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList 
                 }
             })
         }
-        // if (nativeEvent.key === "Enter" && title !== "") {
-        //     showTasksList.splice(index + 1, 0, []);
-        // }
     }
 
     const handleTaskUpdate = () => {
@@ -95,7 +92,7 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList 
         if (task.id) {
             handleTaskUpdate();
         } else {
-            handleCreateNewTask(index);
+            handleCreateNewTask();
         }
         showTasksList.push([]);
     }
