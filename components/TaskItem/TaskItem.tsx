@@ -94,8 +94,8 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
             handleTaskUpdate();
         } else {
             handleCreateNewTask();
+            showTasksList.push([]);
         }
-        showTasksList.push([]);
     }
 
     const checkTaskHandler = () => {
