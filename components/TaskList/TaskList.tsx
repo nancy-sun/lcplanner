@@ -68,7 +68,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
         <View style={styles.container}>
             <TasksCalendar setShowTasks={setShowTasks} showTasks={showTasks} dateMarks={dateMarks} />
             {loading && <ActivityIndicator color="#F09B2A" />}
-            <View style={styles.listContainer}>
+            <SafeAreaView style={styles.listContainer}>
                 <FlatList
                     data={showTasksList}
                     renderItem={({ item, index }) => (
@@ -77,7 +77,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
                         />
                     )}
                 />
-            </View>
+            </SafeAreaView>
         </View>
     );
 }

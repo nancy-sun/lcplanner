@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         marginVertical: 4,
+        minHeight: 26
     },
     textInput: {
         flex: 1,

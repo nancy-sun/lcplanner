@@ -57,7 +57,7 @@ function TasksScreen({ navigation }: RootTabScreenProps<'Tasks'>) {
         <View style={styles.container}>
             <KeyboardAvoidingView
                 behavior={"position"}
-                keyboardVerticalOffset={15}
+                keyboardVerticalOffset={45}
                 style={styles.keyboardAvoid}
             >
                 <TaskList data={data} loading={loading} />
