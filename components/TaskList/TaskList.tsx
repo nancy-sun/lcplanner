@@ -47,9 +47,10 @@ function TaskList({ data, loading }: TaskListQueryProps) {
 
     useEffect(() => {
         const dailyTasks = getTasksByDate(tasks);
-        if (dailyTasks.length != showTasks.length) {
-            dailyTasks.push([]);
+        if (dailyTasks.length !== showTasks.length || dailyTasks[dailyTasks.length - 1]) {
+            dailyTasks.push({});
         }
+
         for (let i = 0; i < dailyTasks.length - 1; i++) {
             if (dailyTasks[i].title === "") {
                 dailyTasks.splice(i, 1);

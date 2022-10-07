@@ -58,6 +58,7 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
         createNewTask({
             variables: newTask
         });
+        showTasksList.push({});
     }
 
     const handleDelete = ({ nativeEvent }: { nativeEvent: any }) => {
@@ -84,6 +85,9 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
         updateTask({
             variables: updatedTask
         })
+        if (index == lastIdx) {
+            showTasksList.push({});
+        }
     }
 
     const taskHandler = () => {
@@ -94,8 +98,8 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
             handleTaskUpdate();
         } else {
             handleCreateNewTask();
-            showTasksList.push([]);
         }
+
     }
 
     const checkTaskHandler = () => {
