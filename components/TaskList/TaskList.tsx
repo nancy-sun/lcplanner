@@ -50,6 +50,12 @@ function TaskList({ data, loading }: TaskListQueryProps) {
         if (dailyTasks.length != showTasks.length) {
             dailyTasks.push([]);
         }
+        for (let i = 0; i < dailyTasks.length - 1; i++) {
+            if (dailyTasks[i].title === "") {
+                dailyTasks.splice(i, 1);
+                i--;
+            }
+        }
         setShowTasksList(dailyTasks);
     }, [showTasks])
 
