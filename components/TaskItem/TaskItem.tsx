@@ -124,6 +124,11 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
         }
     }, [inputRef]);
 
+    useEffect(() => {
+        if (deleteTaskData) {
+            showTasksList.splice(index, 1);
+        }
+    }, [deleteTaskData])
 
     /* error alerts */
     useEffect(() => {
