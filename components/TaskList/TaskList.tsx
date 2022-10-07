@@ -72,7 +72,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
                     data={showTasksList}
                     renderItem={({ item, index }) => (
                         <TaskItem
-                            index={index} task={item} tasksListID={tasksListID} tasksDate={showTasks} lastIdx={lastIdx} showTasksList={showTasksList}
+                            index={index} task={item} tasksListID={tasksListID} tasksDate={showTasks} lastIdx={lastIdx} showTasksList={showTasksList} setShowTasksList={setShowTasksList}
                         />
                     )}
                 />

@@ -5,7 +5,7 @@ import Checkbox from "../Checkbox/Checkbox";
 import styles from "./TaskItemStyles";
 import { useMutation } from "@apollo/client";
 import { CREATE_TASK_MUTATION, DELETE_TASK_MUTATION, UPDATE_TASK_MUTATION } from "../../graphql/mutations";
-import { GET_TASK_LIST_QUERY } from "../../graphql/queries";
+import { GET_TASK_LIST_QUERY, MY_TASKS_LIST_QUERY } from "../../graphql/queries";
 
 interface TaskItemProps {
     task: {
@@ -20,18 +20,19 @@ interface TaskItemProps {
     index: number,
     tasksDate: string,
     lastIdx: number,
-    showTasksList: any
+    showTasksList: any,
+    setShowTasksList: (showTasksList: Array<any>) => void
 }
 
-function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList }: TaskItemProps) {
+function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList, setShowTasksList }: TaskItemProps) {
 
     const [checked, setChecked] = useState<boolean>(false);
     const [title, setTitle] = useState<string>("");
     const inputRef = useRef<any>(null);
 
-    const [updateTask, { data, error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: tasksListID } }] });
-    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: tasksListID } }] });
-    const [deleteTask, { data: deleteTaskData, error: deleteTaskError }] = useMutation(DELETE_TASK_MUTATION, { refetchQueries: [{ query: GET_TASK_LIST_QUERY, variables: { id: tasksListID } }] });
+    const [updateTask, { data, error }] = useMutation(UPDATE_TASK_MUTATION, { refetchQueries: [{ query: MY_TASKS_LIST_QUERY }] });
+    const [createNewTask, { data: createNewTaskData, error: createNewTaskError }] = useMutation(CREATE_TASK_MUTATION, { refetchQueries: [{ query: MY_TASKS_LIST_QUERY }] });
+    const [deleteTask, { data: deleteTaskData, error: deleteTaskError }] = useMutation(DELETE_TASK_MUTATION, { refetchQueries: [{ query: MY_TASKS_LIST_QUERY }] });
 
     const handleTaskLoad = () => {
         if (task.title) {
@@ -122,6 +123,7 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList 
             inputRef?.current?.focus();
         }
     }, [inputRef]);
+
 
     /* error alerts */
     useEffect(() => {
