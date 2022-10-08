@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import jwt_decode from "jwt-decode";
 import { useLazyQuery } from "@apollo/client";
 import { GET_USER_QUERY } from "../graphql/queries";
+import UserAvatar from "../components/UserAvatar/UserAvatar";
 
 interface UserObj {
     id: string,
@@ -16,7 +17,7 @@ interface UserObj {
 function ProfileScreen() {
 
     const [username, setUsername] = useState<string>("");
-    const [userAvatar, setUserAvatar] = useState<string>("");
+    const [avatar, setAvatar] = useState<string>("");
 
     const [getUser, { data, error, loading }] = useLazyQuery(GET_USER_QUERY);
 
@@ -35,7 +36,7 @@ function ProfileScreen() {
     useEffect(() => {
         if (data) {
             setUsername(data.getUser.name);
-            setUserAvatar(data.getUser.avatar);
+            setAvatar(data.getUser.avatar);
         }
     }, [data])
 
@@ -53,9 +54,7 @@ function ProfileScreen() {
     return (
         <View style={styles.container}>
             {loading && <ActivityIndicator color="#F09B2A" />}
-            <Text style={styles.avatar}>
-                avatar
-            </Text>
+            <UserAvatar avatar={avatar} />
             <Text style={styles.name}>
                 {username}
             </Text>
@@ -70,11 +69,6 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         alignItems: "center",
         width: "100%",
-    },
-    avatar: {
-        width: 70,
-        height: 70,
-        backgroundColor: "green",
     },
     name: {
         fontSize: 20,
