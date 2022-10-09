@@ -18,6 +18,7 @@ function ProfileScreen() {
 
     const [username, setUsername] = useState<string>("");
     const [avatar, setAvatar] = useState<string>("");
+    const [userID, setUserID] = useState<string>("");
 
     const [getUser, { data, error, loading }] = useLazyQuery(GET_USER_QUERY);
 
@@ -37,6 +38,8 @@ function ProfileScreen() {
         if (data) {
             setUsername(data.getUser.name);
             setAvatar(data.getUser.avatar);
+            setUserID(data.getUser.id);
+            console.log(data);
         }
     }, [data])
 
@@ -54,7 +57,7 @@ function ProfileScreen() {
     return (
         <View style={styles.container}>
             {loading && <ActivityIndicator color="#F09B2A" />}
-            <UserAvatar avatar={avatar} />
+            <UserAvatar avatar={avatar} id={userID} />
             <Text style={styles.name}>
                 {username}
             </Text>

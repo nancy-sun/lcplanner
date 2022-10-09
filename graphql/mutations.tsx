@@ -26,6 +26,10 @@ const SIGN_IN_MUTATION = gql`mutation SignIn($email: String!, $password: String!
     }
 }`;
 
+const UPDATE_AVATAR_MUTATION = gql`mutation UpdateAvatar($avatar: String!, $id: ID!) {
+    updateAvatar(avatar: $avatar, id: $id)
+}`
+
 const CREATE_TASKS_LIST_MUTATION = gql`mutation CreateTasksList($recap: String) {
     createTasksList(recap: $recap) {
         id
@@ -77,5 +81,5 @@ mutation AddTasksListUser($tasksListID: ID!, $userEmail: String!) {
     }
 }`
 
-export { SIGN_UP_MUTATION, SIGN_IN_MUTATION, CREATE_TASK_MUTATION, CREATE_TASKS_LIST_MUTATION, UPDATE_TASK_MUTATION, DELETE_TASK_MUTATION, ADD_TASKS_LIST_USER_MUTATION };
+export { SIGN_UP_MUTATION, SIGN_IN_MUTATION, UPDATE_AVATAR_MUTATION, CREATE_TASK_MUTATION, CREATE_TASKS_LIST_MUTATION, UPDATE_TASK_MUTATION, DELETE_TASK_MUTATION, ADD_TASKS_LIST_USER_MUTATION };
 
