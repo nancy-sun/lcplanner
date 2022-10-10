@@ -11,7 +11,6 @@ interface UserObj {
     id: string,
     name: string,
     email: string,
-    avatar: string
 }
 
 function ProfileScreen() {

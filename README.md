@@ -23,6 +23,8 @@ Start running
 - Expo
 - Node.js
 - GraphQL
+- MongoDB
+- AWS S3
 - JWT
 
 ## Libraries & Resources  

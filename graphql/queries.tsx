@@ -58,7 +58,6 @@ const GET_ACCESS_TASKS_LIST_QUERY = gql`query GetAccessTasksList {
         owner {
             id
             name
-            avatar
         }
         tasks {
             date
