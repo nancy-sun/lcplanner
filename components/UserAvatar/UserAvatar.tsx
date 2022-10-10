@@ -15,6 +15,7 @@ const imgOptions = {
     includeBase64: true,
 }
 
+// get avatar from s3 based on user id
 function UserAvatar({ id }: { id: string }) {
     const [avatar, setAvatar] = useState<string>("");
 
