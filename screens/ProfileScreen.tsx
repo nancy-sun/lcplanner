@@ -5,7 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import jwt_decode from "jwt-decode";
 import { useLazyQuery } from "@apollo/client";
 import { GET_USER_QUERY } from "../graphql/queries";
-import UserAvatar from "../components/UserAvatar/UserAvatar";
+import ProfileHeader from "../components/ProfileHeader/ProfileHeader";
+import ProfilePieChart from "../components/ProfilePieChart/ProfilePieChart";
 
 interface UserObj {
     id: string,
@@ -54,10 +55,8 @@ function ProfileScreen() {
     return (
         <View style={styles.container}>
             {loading && <ActivityIndicator color="#F09B2A" />}
-            <UserAvatar id={userID} />
-            <Text style={styles.name}>
-                {username}
-            </Text>
+            <ProfileHeader userID={userID} username={username} />
+            <ProfilePieChart />
         </View>
     )
 }
@@ -70,11 +69,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: "100%",
     },
-    name: {
-        fontSize: 20,
-        marginTop: 12,
-        fontWeight: "500",
-    }
 });
 
 export default ProfileScreen;
