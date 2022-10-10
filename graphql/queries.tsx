@@ -6,7 +6,6 @@ const GET_USER_QUERY = gql`query GetUser($id: ID!) {
         id
         name
         email
-        avatar
     }
 }`;
 
