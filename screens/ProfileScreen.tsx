@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Alert, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, Alert, ActivityIndicator, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from '@react-navigation/native';
 import jwt_decode from "jwt-decode";
 import { useLazyQuery } from "@apollo/client";
-import { GET_USER_QUERY } from "../graphql/queries";
+import { GET_LC_DATA_QUERY, GET_USER_QUERY } from "../graphql/queries";
 import ProfileHeader from "../components/ProfileHeader/ProfileHeader";
 import ProfilePieChart from "../components/ProfilePieChart/ProfilePieChart";
 
@@ -18,8 +18,10 @@ function ProfileScreen() {
 
     const [username, setUsername] = useState<string>("");
     const [userID, setUserID] = useState<string>("");
+    const [lcSubmitStat, setLcSubmitStat] = useState<Array<any>>([]);
 
     const [getUser, { data, error, loading }] = useLazyQuery(GET_USER_QUERY);
+    const [getLCData, { data: lcData, error: lcError, loading: lcLoading }] = useLazyQuery(GET_LC_DATA_QUERY);
 
     const navigate = useNavigation();
 
@@ -29,15 +31,18 @@ function ProfileScreen() {
             navigate.navigate("SignIn");;
         } else {
             const decoded = jwt_decode<UserObj>(token);
-            getUser({ variables: { id: decoded.id } })
+            getUser({ variables: { id: decoded.id } });
         }
-    }
+    };
+
+    const getLCProgress = () => {
+        getLCData({ variables: { username: username } });
+    };
 
     useEffect(() => {
         if (data) {
             setUsername(data.getUser.name);
             setUserID(data.getUser.id);
-            console.log(data);
         }
     }, [data])
 
@@ -52,11 +57,29 @@ function ProfileScreen() {
         }
     }, [error]);
 
+    useEffect(() => {
+        getLCProgress();
+    }, [username]);
+
+    useEffect(() => {
+        if (lcData) {
+            setLcSubmitStat(lcData.getLCData.submitStats);
+        }
+    }, [lcData]);
+
+    useEffect(() => {
+        if (lcError) {
+            console.log(lcError);
+        }
+    }, [lcError]);
+
     return (
         <View style={styles.container}>
             {loading && <ActivityIndicator color="#F09B2A" />}
             <ProfileHeader userID={userID} username={username} />
-            <ProfilePieChart />
+            {lcSubmitStat &&
+                <ProfilePieChart lcSubmitStat={lcSubmitStat} />
+            }
         </View>
     )
 }

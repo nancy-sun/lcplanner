@@ -66,6 +66,19 @@ const GET_ACCESS_TASKS_LIST_QUERY = gql`query GetAccessTasksList {
             note
         }
     }
-}`
+}`;
 
-export { MY_TASKS_LIST_QUERY, GET_TASK_LIST_QUERY, GET_USER_QUERY, GET_ACCESS_TASKS_LIST_QUERY };
+// get user's LC data
+const GET_LC_DATA_QUERY = gql`query GetLCData($username: String!) {
+    getLCData(username: $username) {
+        username
+        submissionCalendar
+        submitStats {
+            count
+            difficulty
+            submissions
+        }
+    }
+}`;
+
+export { MY_TASKS_LIST_QUERY, GET_TASK_LIST_QUERY, GET_USER_QUERY, GET_ACCESS_TASKS_LIST_QUERY, GET_LC_DATA_QUERY };
