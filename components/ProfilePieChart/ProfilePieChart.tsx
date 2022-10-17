@@ -16,8 +16,8 @@ function ProfilePieChart({ lcSubmitStat }: { lcSubmitStat: Array<any> }) {
     const [pieChartData, setPieChartData] = useState<Array<PieChartItem>>();
     const [totalProblemsDone, setTotalProblemsDone] = useState<number>(0);
 
-    useEffect(() => {
-        let data: Array<PieChartItem> = [];
+    const generateChartData = () => {
+        const data: Array<PieChartItem> = [];
         lcSubmitStat.forEach((stat) => {
             if (stat.difficulty !== "All") {
                 const difficulty: string = stat.difficulty.toLowerCase();
@@ -33,6 +33,10 @@ function ProfilePieChart({ lcSubmitStat }: { lcSubmitStat: Array<any> }) {
         });
         setTotalProblemsDone(lcSubmitStat[0]?.count);
         setPieChartData(data);
+    }
+
+    useEffect(() => {
+        generateChartData();
     }, [lcSubmitStat]);
 
     return (
@@ -51,7 +55,7 @@ function ProfilePieChart({ lcSubmitStat }: { lcSubmitStat: Array<any> }) {
             }
         </View>
     )
-}
+};
 
 const chartConfig = {
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
