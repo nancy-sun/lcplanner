@@ -9,7 +9,7 @@ LCPLanner is a full-stack mobile app for leetcode users to keep a record of prob
 
 ## Installation  
       
-clone source code locally   
+Download / clone source code locally   
 ```$ git clone https://github.com/nancy-sun/lcplanner```
    
 Install dependencies   
@@ -36,8 +36,12 @@ Start running
 - apollo/client
 - react-native-image-picker
 - react-native-calendars
+   
+&nbsp;
 
 ## Prototype  
+   
+&nbsp;
 
 ## Author  
 [@Nancy Sun](https://github.com/nancy-sun)
