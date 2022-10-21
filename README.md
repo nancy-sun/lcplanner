@@ -1,9 +1,11 @@
 # LCPlanner
 
 Backend repo: https://github.com/nancy-sun/lcplanner-server
-server repo: 
+
 ## Description  
-LCPLanner is a full-stack mobile app for leetcode users to keep a record of problems they have accomplished and problems they plan to do. The app also allow users to share their progress and agenda with peers to provide better peer learning experience.
+LCPLanner is a full-stack mobile app for leetcode users to keep a record of problems they have accomplished and problems they plan to do. The app also allow users to share their progress with peers to provide better peer learning experience.
+    
+&nbsp;
 
 ## Installation  
       
@@ -15,8 +17,9 @@ Install dependencies
    
 Start running   
 ```$ npm start```
+      
+&nbsp;
    
-
 ## Tech Stack  
 - React Native
 - Typescript
@@ -26,9 +29,13 @@ Start running
 - MongoDB
 - AWS S3
 - JWT
-
-## Libraries & Resources  
-
+   
+&nbsp;
+## Other Libraries & Resources  
+- react-native-chart-kit
+- apollo/client
+- react-native-image-picker
+- react-native-calendars
 
 ## Prototype  
 
