@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#191919",
     },
-
 });
 
 export default ViewOnlyTasksScreen;
