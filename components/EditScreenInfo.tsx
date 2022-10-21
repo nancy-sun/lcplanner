@@ -1,11 +1,11 @@
-import * as WebBrowser from 'expo-web-browser';
-import { Linking, StyleSheet, TouchableOpacity } from 'react-native';
+import * as WebBrowser from "expo-web-browser";
+import { Linking, StyleSheet, TouchableOpacity } from "react-native";
 
-import Colors from '../constants/Colors';
-import { MonoText } from './StyledText';
-import { Text, View } from './Themed';
-import { Entypo } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+import Colors from "../constants/Colors";
+import { MonoText } from "./StyledText";
+import { Text, View } from "./Themed";
+import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function EditScreenInfo({ path }: { path: string }) {
 
@@ -34,34 +34,34 @@ export default function EditScreenInfo({ path }: { path: string }) {
             </View>
         </View>
     );
-}
+};
 
 function linkToLinkedin() {
     WebBrowser.openBrowserAsync(
-        'https://www.linkedin.com/in/-nancy-sun/'
+        "https://www.linkedin.com/in/-nancy-sun/"
     );
-}
+};
 
 function linkToGithub() {
     WebBrowser.openBrowserAsync(
-        'https://github.com/nancy-sun'
+        "https://github.com/nancy-sun"
     );
-}
+};
 
 function linkToEmail() {
-    Linking.openURL('mailto:nancysnx1110@gmail.com');
-}
+    Linking.openURL("mailto:nancysnx1110@gmail.com");
+};
 
 const styles = StyleSheet.create({
     getStartedContainer: {
-        alignItems: 'center',
+        alignItems: "center",
         marginHorizontal: 45,
         justifyContent: "space-between",
     },
     getStartedText: {
         fontSize: 17,
         lineHeight: 24,
-        textAlign: 'center',
+        textAlign: "center",
     },
     getStartedTextFirst: {
         marginBottom: 10
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     linksContainer: {
         marginTop: 40,
         marginHorizontal: 100,
-        alignItems: 'center',
+        alignItems: "center",
         flexDirection: "row",
         justifyContent: "space-between",
     },
@@ -77,6 +77,6 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
     },
     helpLinkText: {
-        textAlign: 'center',
+        textAlign: "center",
     },
 });

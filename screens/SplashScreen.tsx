@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, ActivityIndicator } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect } from "react";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function SplashScreen() {
 
@@ -10,7 +10,7 @@ function SplashScreen() {
     const isLoggedIn = async () => {
         const token = await AsyncStorage.getItem("token");
         return token != null;
-    }
+    };
 
     const checkLoggedIn = async () => {
         if (await isLoggedIn()) {
@@ -18,19 +18,18 @@ function SplashScreen() {
         } else {
             navigate.navigate("SignIn");
         }
-    }
+    };
 
     useEffect(() => {
         checkLoggedIn();
-    }, [])
+    }, []);
 
     return (
         <View style={styles.container}>
             <ActivityIndicator />
         </View>
-    )
-}
-
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Dimensions } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { View, Dimensions } from "react-native";
 import { PieChart } from "react-native-chart-kit";
 
 type PieChartItem = {
@@ -33,7 +33,7 @@ function ProfilePieChart({ lcSubmitStat }: { lcSubmitStat: Array<any> }) {
         });
         setTotalProblemsDone(lcSubmitStat[0]?.count);
         setPieChartData(data);
-    }
+    };
 
     useEffect(() => {
         generateChartData();

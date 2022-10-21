@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { FlatList, View, Alert, ActivityIndicator } from "react-native";
-import { useQuery } from '@apollo/client';
-import UserItem from '../UserItem/UserItem';
-import { GET_ACCESS_TASKS_LIST_QUERY } from '../../graphql/queries';
-import styles from './UserListStyles';
+import { useQuery } from "@apollo/client";
+import UserItem from "../UserItem/UserItem";
+import { GET_ACCESS_TASKS_LIST_QUERY } from "../../graphql/queries";
+import styles from "./UserListStyles";
 
 function UserList() {
 
@@ -15,7 +15,7 @@ function UserList() {
         if (data) {
             setUsers(data.getAccessTasksList);
         }
-    }, [data])
+    }, [data]);
 
     useEffect(() => {
         if (error) {
@@ -34,6 +34,6 @@ function UserList() {
             />
         </View>
     );
-}
+};
 
 export default UserList;

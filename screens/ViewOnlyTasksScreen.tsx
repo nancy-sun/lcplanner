@@ -1,16 +1,14 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
-import { RootTabScreenProps } from "../types";
-import TaskList from '../components/TaskList/TaskList';
 import { useRoute, RouteProp } from "@react-navigation/native";
 
 type AppRouteParamList = {
     user: { id: string } | undefined
-}
+};
 
 function ViewOnlyTasksScreen() {
-    const route = useRoute<RouteProp<AppRouteParamList, 'user'>>();
+    const route = useRoute<RouteProp<AppRouteParamList, "user">>();
     const userID = route.params?.id;
 
     return (
@@ -18,7 +16,7 @@ function ViewOnlyTasksScreen() {
             <Text style={styles.title}>{userID}</Text>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {

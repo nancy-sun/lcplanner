@@ -8,7 +8,7 @@ interface ModalProps {
     modalVisible: boolean,
     setModalVisible: Dispatch<SetStateAction<boolean>>,
     tasksListID: string
-}
+};
 
 function AddFriendModal(props: ModalProps) {
 
@@ -20,22 +20,20 @@ function AddFriendModal(props: ModalProps) {
             Alert.alert("Please enter email address.");
         }
         AddTasksListUser({ variables: { tasksListID: props.tasksListID, userEmail: email } });
-    }
+    };
 
     useEffect(() => {
         if (data) {
-            Alert.alert("Successfully added friend.")
-            props.setModalVisible(false)
+            Alert.alert("Successfully added friend.");
+            props.setModalVisible(false);
         }
-    }, [data])
+    }, [data]);
 
     useEffect(() => {
         if (error) {
             Alert.alert(error.message);
         }
-    }, [error])
-
-
+    }, [error]);
 
     return (
         <View style={styles.centeredView}>
@@ -74,9 +72,7 @@ function AddFriendModal(props: ModalProps) {
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
-
                 </TouchableOpacity>
-
             </Modal>
         </View>
     );

@@ -1,5 +1,5 @@
-import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View } from "react-native";
+import React, { useEffect } from "react";
 import { Calendar } from "react-native-calendars";
 import styles from "./TasksCalendarStyles";
 
@@ -7,14 +7,14 @@ interface TasksCalendarProps {
     setShowTasks: (day: string) => void,
     showTasks: string,
     dateMarks: any
-}
+};
 
 function TasksCalendar({ setShowTasks, showTasks, dateMarks }: TasksCalendarProps) {
 
     useEffect(() => {
         let date = new Date();
-        setShowTasks(date.toLocaleDateString('en-CA'))
-    }, [])
+        setShowTasks(date.toLocaleDateString("en-CA"))
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -35,31 +35,31 @@ function TasksCalendar({ setShowTasks, showTasks, dateMarks }: TasksCalendarProp
                 }}
             />
         </View>
-    )
+    );
 };
 
 const calendarTheme = {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     arrowColor: "#F09B2A",
-    calendarBackground: '#ffffff',
-    textSectionTitleColor: '#b6c1cd',
-    textSectionTitleDisabledColor: '#d9e1e8',
+    calendarBackground: "#ffffff",
+    textSectionTitleColor: "#b6c1cd",
+    textSectionTitleDisabledColor: "#d9e1e8",
     selectedDayBackgroundColor: "#448f4b",
-    selectedDayTextColor: '#f3f3f3',
+    selectedDayTextColor: "#f3f3f3",
     todayTextColor: "#448f4b",
-    dayTextColor: '#222222',
-    textDisabledColor: '#d9e1e8',
+    dayTextColor: "#222222",
+    textDisabledColor: "#d9e1e8",
     dotColor: "#F09B2A",
     selectedDotColor: "#ffffff",
-    disabledArrowColor: '#d9e1e8',
+    disabledArrowColor: "#d9e1e8",
     monthTextColor: "#red",
-    indicatorColor: 'blue',
+    indicatorColor: "blue",
     textDayFontWeight: "300",
     textMonthFontWeight: "bold",
     textDayHeaderFontWeight: "400",
     textDayFontSize: 16,
     textMonthFontSize: 20,
     textDayHeaderFontSize: 12,
-}
+};
 
 export default TasksCalendar;

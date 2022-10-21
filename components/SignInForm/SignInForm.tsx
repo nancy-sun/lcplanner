@@ -3,7 +3,7 @@ import { View, Text, TextInput, Pressable, ActivityIndicator, Alert } from "reac
 import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN_MUTATION } from "../../graphql/mutations";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./SignInFormStyles";
 
 function SignInForm() {
@@ -17,25 +17,25 @@ function SignInForm() {
 
     const handleSubmit = () => {
         signIn({ variables: { email, password } });
-    }
+    };
 
     const redirectToSignUp = () => {
         navigate.navigate("SignUp");
-    }
+    };
 
     useEffect(() => {
         if (data) {
-            AsyncStorage.setItem('token', data.signIn.token).then(() => {
+            AsyncStorage.setItem("token", data.signIn.token).then(() => {
                 navigate.navigate("Root");
-            })
+            });
         }
-    }, [data])
+    }, [data]);
 
     useEffect(() => {
         if (error) {
-            Alert.alert('Invalid credentials, try again');
+            Alert.alert("Invalid credentials, try again");
         }
-    }, [error])
+    }, [error]);
 
     return (
         <View style={styles.container}>
@@ -64,9 +64,7 @@ function SignInForm() {
                 </Text>
             </Pressable>
         </View>
-    )
-}
-
-
+    );
+};
 
 export default SignInForm;

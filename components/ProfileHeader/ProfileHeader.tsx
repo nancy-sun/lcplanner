@@ -1,7 +1,7 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import UserAvatar from '../UserAvatar/UserAvatar';
-import styles from './ProfileHeaderStyles';
+import { View, Text } from "react-native";
+import React from "react";
+import UserAvatar from "../UserAvatar/UserAvatar";
+import styles from "./ProfileHeaderStyles";
 
 function ProfileHeader({ userID, username }: { userID: string, username: string }) {
     return (
@@ -11,8 +11,7 @@ function ProfileHeader({ userID, username }: { userID: string, username: string 
                 {username}
             </Text>
         </View>
-    )
-}
-
+    );
+};
 
 export default ProfileHeader;

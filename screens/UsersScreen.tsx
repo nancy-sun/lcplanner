@@ -1,9 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { Alert, StyleSheet } from 'react-native';
-import { Text, View } from '../components/Themed';
-import UserList from '../components/UserList/UserList';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet } from "react-native";
+import { View } from "../components/Themed";
+import UserList from "../components/UserList/UserList";
 
 export default function UsersScreen({ navigation }: any) {
 
@@ -12,24 +12,24 @@ export default function UsersScreen({ navigation }: any) {
     const isLoggedIn = async () => {
         const token = await AsyncStorage.getItem("token");
         return token != null;
-    }
+    };
 
     const checkLoggedIn = async () => {
         if (!await isLoggedIn()) {
             navigate.navigate("SignIn");
         }
-    }
+    };
 
     useEffect(() => {
         checkLoggedIn();
-    }, [])
+    }, []);
 
     return (
         <View style={styles.container}>
             <UserList />
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {

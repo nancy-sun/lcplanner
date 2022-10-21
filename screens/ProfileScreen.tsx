@@ -13,7 +13,7 @@ interface UserObj {
     id: string,
     name: string,
     email: string,
-}
+};
 
 function ProfileScreen() {
 
@@ -41,16 +41,30 @@ function ProfileScreen() {
         getLCData({ variables: { username: "nancys" } });
     };
 
+    const formatCalendarData = async (data: any) => {
+        const dataArr = [];
+        for (let key in data) {
+            const date = new Date(Number(key) * 1000).toLocaleDateString("en-CA");
+            const dailyData = {
+                date: date,
+                count: data[key]
+            };
+
+            dataArr.push(dailyData);
+        }
+        return dataArr;
+    };
+
     useEffect(() => {
         if (data) {
             setUsername(data.getUser.name);
             setUserID(data.getUser.id);
         }
-    }, [data])
+    }, [data]);
 
     useEffect(() => {
         getProfile();
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (error) {
@@ -64,20 +78,6 @@ function ProfileScreen() {
             getLCProgress();
         }
     }, [username]);
-
-    const formatCalendarData = async (data: any) => {
-        const dataArr = [];
-        for (let key in data) {
-            const date = new Date(Number(key) * 1000).toLocaleDateString("en-CA");
-            const dailyData = {
-                date: date,
-                count: data[key]
-            }
-
-            dataArr.push(dailyData);
-        }
-        return dataArr;
-    }
 
     const setContributionData = async (data: any) => {
         const calendarData = await formatCalendarData(data);
@@ -108,7 +108,7 @@ function ProfileScreen() {
             }
             <ProfileContributionGraph lcCalendarStat={lcCalendarStat} />
         </View>
-    )
+    );
 };
 
 const styles = StyleSheet.create({

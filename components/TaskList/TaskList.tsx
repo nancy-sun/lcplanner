@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View } from "../Themed";
-import { ActivityIndicator, Alert, FlatList, KeyboardAvoidingView, Pressable, SafeAreaView, ScrollView, Text } from "react-native";
-import { useMutation, useQuery } from "@apollo/client";
-import { Entypo } from "@expo/vector-icons";
-import TaskItem from '../TaskItem/TaskItem';
-import { MY_TASKS_LIST_QUERY } from "../../graphql/queries";
+import { ActivityIndicator, FlatList, SafeAreaView } from "react-native";
+import TaskItem from "../TaskItem/TaskItem";
 import styles from "./TaskListStyles";
 import TasksCalendar from "../TasksCalendar/TasksCalendar";
 
@@ -12,7 +9,7 @@ import TasksCalendar from "../TasksCalendar/TasksCalendar";
 interface TaskListQueryProps {
     data: any,
     loading: boolean,
-}
+};
 
 function TaskList({ data, loading }: TaskListQueryProps) {
     const [tasks, setTasks] = useState<any>([]);
@@ -28,15 +25,15 @@ function TaskList({ data, loading }: TaskListQueryProps) {
             dates.push(task.date);
         });
         setDateMarks(dates);
-    }
+    };
 
     const getTasksByDate = (tasks: Array<any>) => {
         return tasks.filter((task) => task.date === showTasks);
-    }
+    };
 
     useEffect(() => {
         getDateMarks(tasks);
-    }, [tasks])
+    }, [tasks]);
 
     useEffect(() => {
         if (data) {
@@ -58,11 +55,11 @@ function TaskList({ data, loading }: TaskListQueryProps) {
             }
         }
         setShowTasksList(dailyTasks);
-    }, [showTasks])
+    }, [showTasks]);
 
     useEffect(() => {
         setLastIdx(showTasksList.length - 1);
-    }, [showTasksList])
+    }, [showTasksList]);
 
     return (
         <View style={styles.container}>
@@ -80,29 +77,6 @@ function TaskList({ data, loading }: TaskListQueryProps) {
             </SafeAreaView>
         </View>
     );
-}
-
+};
 
 export default TaskList;
-
-// {/* <ScrollView style={styles.container} horizontal={false} >
-// <ScrollView style={styles.container} horizontal={true}>
-//     <KeyboardAvoidingView
-//         style={{ flex: 1 }}
-//         behavior={"position"}
-//         keyboardVerticalOffset={110}>
-//         {loading && <ActivityIndicator color="#F09B2A" />}
-//         {/* {tasks && tasks.map(({ item, index }: { item: object, index: number }) => <TaskItem key={index} index={index} task={item} id={id} />)} */}
-//         <View>
-//             <FlatList
-//                 data={tasks}
-//                 renderItem={({ item, index }) => (
-//                     <TaskItem
-//                         index={index + 1} task={item} id={tasks.id}
-//                     />
-//                 )}
-//             />
-//         </View>
-//     </KeyboardAvoidingView>
-// </ScrollView>
-// </ScrollView> */}

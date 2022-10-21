@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect, SyntheticEvent } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { View } from "../Themed";
 import { Alert, TextInput } from "react-native";
 import Checkbox from "../Checkbox/Checkbox";
 import styles from "./TaskItemStyles";
 import { useMutation } from "@apollo/client";
 import { CREATE_TASK_MUTATION, DELETE_TASK_MUTATION, UPDATE_TASK_MUTATION } from "../../graphql/mutations";
-import { GET_TASK_LIST_QUERY, MY_TASKS_LIST_QUERY } from "../../graphql/queries";
+import { MY_TASKS_LIST_QUERY } from "../../graphql/queries";
 
 interface TaskItemProps {
     task: {
@@ -22,7 +22,7 @@ interface TaskItemProps {
     lastIdx: number,
     showTasksList: any,
     setShowTasksList: (showTasksList: Array<any>) => void
-}
+};
 
 function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList, setShowTasksList }: TaskItemProps) {
 
@@ -45,7 +45,7 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
                 inputRef.current.focus();
             }
         }
-    }
+    };
 
     const handleCreateNewTask = () => {
         const newTask = {
@@ -59,7 +59,7 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
             variables: newTask
         });
         showTasksList.push({});
-    }
+    };
 
     const handleDelete = ({ nativeEvent }: { nativeEvent: any }) => {
         if (!task.id) {
@@ -70,9 +70,9 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
                 variables: {
                     id: task.id
                 }
-            })
+            });
         }
-    }
+    };
 
     const handleTaskUpdate = () => {
         const updatedTask = {
@@ -84,11 +84,11 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
         };
         updateTask({
             variables: updatedTask
-        })
+        });
         if (index == lastIdx) {
             showTasksList.push({});
         }
-    }
+    };
 
     const taskHandler = () => {
         if (title === "") {
@@ -99,8 +99,7 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
         } else {
             handleCreateNewTask();
         }
-
-    }
+    };
 
     const checkTaskHandler = () => {
         if (title === "" || !task.id) {
@@ -108,11 +107,11 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
         } else {
             handleTaskUpdate();
         }
-    }
+    };
 
     const handleCheckBoxPress = () => {
         setChecked(!checked);
-    }
+    };
 
     useEffect(() => {
         handleTaskLoad();
@@ -120,7 +119,7 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
 
     useEffect(() => {
         checkTaskHandler();
-    }, [checked])
+    }, [checked]);
 
     useEffect(() => {
         if (inputRef.current) {
@@ -132,26 +131,26 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
         if (deleteTaskData) {
             showTasksList.splice(index, 1);
         }
-    }, [deleteTaskData])
+    }, [deleteTaskData]);
 
     /* error alerts */
     useEffect(() => {
         if (deleteTaskError) {
             Alert.alert("fail deleting task ", deleteTaskError.message);
         }
-    }, [deleteTaskError])
+    }, [deleteTaskError]);
 
     useEffect(() => {
         if (createNewTaskError) {
             Alert.alert("fail editing task ", createNewTaskError.message);
         }
-    }, [createNewTaskError])
+    }, [createNewTaskError]);
 
     useEffect(() => {
         if (error) {
             Alert.alert("fail editing task ", error.message);
         }
-    }, [error])
+    }, [error]);
 
     return (
         <View style={styles.container}>
@@ -166,6 +165,6 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
             />
         </View>
     );
-}
+};
 
 export default TaskItem;

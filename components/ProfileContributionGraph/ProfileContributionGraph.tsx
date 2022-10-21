@@ -1,4 +1,3 @@
-import { setBackgroundColorAsync } from "expo-system-ui";
 import React from "react";
 import { View } from "react-native";
 import { Dimensions } from "react-native";
@@ -6,7 +5,6 @@ import { ContributionGraph } from "react-native-chart-kit";
 
 function ProfileContributionGraph({ lcCalendarStat }: { lcCalendarStat: Array<any> }) {
     const screenWidth = Dimensions.get("window").width;
-
     return (
         <View>
             {lcCalendarStat &&

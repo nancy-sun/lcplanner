@@ -1,17 +1,17 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect } from "react";
 import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import SignInForm from "../components/SignInForm/SignInForm";
 
 function SignInScreen() {
 
     const removePreviousToken = async () => {
         await AsyncStorage.removeItem("token");
-    }
+    };
 
     useEffect(() => {
         removePreviousToken();
-    }, [])
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -21,8 +21,8 @@ function SignInScreen() {
                 <SignInForm />
             </KeyboardAvoidingView>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {

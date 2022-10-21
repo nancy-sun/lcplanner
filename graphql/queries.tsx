@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 // get user info in profile
 const GET_USER_QUERY = gql`query GetUser($id: ID!) {
