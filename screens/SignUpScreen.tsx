@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import { View } from "../components/Themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SignUpForm from "../components/SignUpForm/SignUpForm";
 
@@ -31,6 +32,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: "white",
         width: "100%"
+    },
+    text: {
+        fontSize: 16
     }
 });
 

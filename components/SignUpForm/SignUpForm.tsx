@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Pressable, ActivityIndicator, Alert } from "react-native";
+import { TextInput, Pressable, ActivityIndicator, Alert } from "react-native";
+import { Text, View } from "../Themed";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP_MUTATION } from "../../graphql/mutations";
@@ -42,10 +43,14 @@ function SignUpForm() {
         }
     }, [error]);
 
+    useEffect(() => {
+        Alert.alert("For best experience, please use your Leetcode username");
+    }, []);
+
     return (
         <View style={styles.container}>
             <TextInput
-                placeholder="username"
+                placeholder="Leetcode username"
                 autoCapitalize="none"
                 value={name}
                 onChangeText={setName}

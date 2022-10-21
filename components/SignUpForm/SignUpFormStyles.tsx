@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         fontSize: 19.8,
         fontWeight: "500",
         color: "#F09B2A",
-    }
+    },
 });
 
 export default styles;
