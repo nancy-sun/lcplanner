@@ -20,6 +20,7 @@ function ProfileScreen() {
     const [username, setUsername] = useState<string>("");
     const [userID, setUserID] = useState<string>("");
     const [lcSubmitStat, setLcSubmitStat] = useState<Array<any>>([]);
+    const [lcCalendarStat, setLcCalendarStat] = useState<Array<any>>([]);
 
     const [getUser, { data, error, loading }] = useLazyQuery(GET_USER_QUERY);
     const [getLCData, { data: lcData, error: lcError, loading: lcLoading }] = useLazyQuery(GET_LC_DATA_QUERY);
@@ -37,7 +38,7 @@ function ProfileScreen() {
     };
 
     const getLCProgress = () => {
-        getLCData({ variables: { username: username } });
+        getLCData({ variables: { username: "nancys" } });
     };
 
     useEffect(() => {
@@ -64,9 +65,31 @@ function ProfileScreen() {
         }
     }, [username]);
 
+    const formatCalendarData = async (data: any) => {
+        const dataArr = [];
+        for (let key in data) {
+            const date = new Date(Number(key) * 1000).toLocaleDateString("en-CA");
+            const dailyData = {
+                date: date,
+                count: data[key]
+            }
+
+            dataArr.push(dailyData);
+        }
+        return dataArr;
+    }
+
+    const setContributionData = async (data: any) => {
+        const calendarData = await formatCalendarData(data);
+        setLcCalendarStat(calendarData);
+    }
+
     useEffect(() => {
         if (lcData) {
             setLcSubmitStat(lcData.getLCData.submitStats);
+            // setLcCalendarStat(lcData.submissionCalendar)
+            // console.log(JSON.parse(lcData.getLCData.submissionCalendar));
+            setContributionData(JSON.parse(lcData.getLCData.submissionCalendar));
         }
     }, [lcData]);
 
@@ -83,7 +106,7 @@ function ProfileScreen() {
             {lcSubmitStat &&
                 <ProfilePieChart lcSubmitStat={lcSubmitStat} />
             }
-            <ProfileContributionGraph />
+            <ProfileContributionGraph lcCalendarStat={lcCalendarStat} />
         </View>
     )
 };
