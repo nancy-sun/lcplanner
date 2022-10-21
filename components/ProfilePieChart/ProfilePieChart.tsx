@@ -59,7 +59,7 @@ function ProfilePieChart({ lcSubmitStat }: { lcSubmitStat: Array<any> }) {
 
 const chartConfig = {
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    strokeWidth: 5
+    strokeWidth: 5,
 };
 
 const pieChatColorTheme = new Map([

@@ -7,6 +7,7 @@ import { useLazyQuery } from "@apollo/client";
 import { GET_LC_DATA_QUERY, GET_USER_QUERY } from "../graphql/queries";
 import ProfileHeader from "../components/ProfileHeader/ProfileHeader";
 import ProfilePieChart from "../components/ProfilePieChart/ProfilePieChart";
+import ProfileContributionGraph from "../components/ProfileContributionGraph/ProfileContributionGraph";
 
 interface UserObj {
     id: string,
@@ -58,7 +59,9 @@ function ProfileScreen() {
     }, [error]);
 
     useEffect(() => {
-        getLCProgress();
+        if (username) {
+            getLCProgress();
+        }
     }, [username]);
 
     useEffect(() => {
@@ -76,13 +79,14 @@ function ProfileScreen() {
     return (
         <View style={styles.container}>
             {loading && <ActivityIndicator color="#F09B2A" />}
-            <ProfileHeader userID={userID} username={username} />
+            {/* <ProfileHeader userID={userID} username={username} /> */}
             {lcSubmitStat &&
                 <ProfilePieChart lcSubmitStat={lcSubmitStat} />
             }
+            <ProfileContributionGraph />
         </View>
     )
-}
+};
 
 const styles = StyleSheet.create({
     container: {
