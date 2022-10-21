@@ -102,7 +102,7 @@ function ProfileScreen() {
     return (
         <View style={styles.container}>
             {loading && <ActivityIndicator color="#F09B2A" />}
-            {/* <ProfileHeader userID={userID} username={username} /> */}
+            <ProfileHeader userID={userID} username={username} />
             {lcSubmitStat &&
                 <ProfilePieChart lcSubmitStat={lcSubmitStat} />
             }
