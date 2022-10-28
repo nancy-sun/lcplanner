@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderWidth: 2,
         borderColor: "#b7b7b7",
-        backgroundColor: "green",
     },
     defaultAvatar: {
         width: 70,

@@ -49,7 +49,7 @@ function TasksScreen({ navigation }: RootTabScreenProps<"Tasks">) {
 
     useEffect(() => {
         if (error) {
-            Alert.alert(`Error fetching tasks ${error.message}`);
+            Alert.alert(`Please sign in.`);
         }
     }, [error]);
 

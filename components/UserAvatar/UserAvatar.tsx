@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { View, Image, TouchableHighlight, } from "react-native";
-import { launchImageLibrary } from "react-native-image-picker";
+import { Buffer } from "buffer";
 import "react-native-url-polyfill/auto";
 import "react-native-get-random-values";
+import * as ImagePicker from 'expo-image-picker';
 import { S3Client, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
-import { FontAwesome } from "@expo/vector-icons";
+import * as FileSystem from 'expo-file-system';
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { AWS_S3_REGION, AWS_S3_IDENTITY_POOL_ID, AWS_S3_BUCKET_NAME } from "@env";
+import { FontAwesome } from "@expo/vector-icons";
 import styles from "./UserAvatarStyles";
 
 const imgOptions = {
-    mediaType: "photo",
-    maxWidth: 500,
-    maxHeight: 500,
-    includeBase64: true,
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    aspect: [3, 3],
+    quality: 1,
+    base64: true
 };
 
 // get avatar from s3 based on user id
@@ -45,59 +49,35 @@ function UserAvatar({ id }: { id: string }) {
         });
     };
 
-    const streamToString = (stream: any) => {
-        return new Promise((resolve, reject) => {
-            if (stream instanceof ReadableStream === false) {
-                reject(
-                    "Expected stream to be instance of ReadableStream, but got " +
-                    typeof stream
-                );
-            }
-            let text = "";
-            const decoder = new TextDecoder("utf-8");
-            const reader = stream.getReader();
-            const processRead = ({ done, value }: { done: any, value: any }) => {
-                if (done) {
-                    // resolve promise with chunks
-                    resolve(text);
-                    return;
-                }
-                text += decoder.decode(value);
-                // Not done, keep reading
-                reader.read().then(processRead);
-            };
-            // start read
-            reader.read().then(processRead);
-        });
-    };
-
     const getAvatarFromS3 = async () => {
         const bucketParams = {
             Bucket: AWS_S3_BUCKET_NAME,
             Key: id,
         };
         try {
-            // Get the object} from the Amazon S3 bucket. It is returned as a ReadableStream.
-            const data = await client.send(new GetObjectCommand(bucketParams));
-            if (data.Body) {
-                const bodyContents = await streamToString(data.Body as ReadableStream);
-                setAvatar("data:image/jpeg;base64," + bodyContents);
+            const data = new GetObjectCommand(bucketParams);
+            if (data) {
+                const url = await getSignedUrl(client, data);
+                setAvatar(url);
             }
         } catch (err) {
-            // console.log("Error", err);
+            console.log("Error", err);
             return;
         }
     };
 
     const uploadAvatar = async () => {
-        const result = await launchImageLibrary({ ...imgOptions });
-        if (result.assets) {
-            const imageBase64 = result.assets[0].base64;
-            const imageURI = result.assets[0].uri;
+        const result = await ImagePicker.launchImageLibraryAsync({ ...imgOptions });
+        if (!result.cancelled) {
+            setAvatar(result.uri);
+            const imageURI = result.uri;
+            const imageBase64 = await FileSystem.readAsStringAsync(imageURI, {
+                encoding: "base64",
+            });
             if (imageBase64 && imageURI) {
-                setAvatar(imageURI);
-                const arrayBuffer = Buffer.from(imageBase64, "binary");
+                const arrayBuffer = Buffer.from(imageBase64, "base64");
                 uploadToS3(arrayBuffer);
+                setAvatar(imageURI);
             }
         }
     };
@@ -113,7 +93,7 @@ function UserAvatar({ id }: { id: string }) {
             <TouchableHighlight activeOpacity={0.8} underlayColor="#b7b7b7"
                 style={styles.container} onPress={() => uploadAvatar()} >
                 {avatar ?
-                    <Image style={styles.avatar} source={{ uri: avatar }} /> :
+                    <Image style={styles.avatar} source={{ uri: avatar, scale: 1 }} resizeMode="cover" /> :
                     <View style={styles.defaultAvatar}>
                         <FontAwesome name="user" size={45} color="#F09B2A" />
                     </View>

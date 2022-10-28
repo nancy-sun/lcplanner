@@ -38,7 +38,7 @@ function ProfileScreen() {
     };
 
     const getLCProgress = () => {
-        getLCData({ variables: { username: "nancys" } });
+        getLCData({ variables: { username: username } });
     };
 
     const formatCalendarData = async (data: any) => {
