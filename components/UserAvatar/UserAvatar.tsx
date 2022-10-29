@@ -3,17 +3,17 @@ import { View, Image, TouchableHighlight, } from "react-native";
 import { Buffer } from "buffer";
 import "react-native-url-polyfill/auto";
 import "react-native-get-random-values";
-import * as ImagePicker from 'expo-image-picker';
-import { S3Client, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
+import * as ImagePicker from "expo-image-picker";
+import { S3Client, GetObjectCommand, PutObjectCommand, PutObjectCommandInput } from "@aws-sdk/client-s3";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from "expo-file-system";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { AWS_S3_REGION, AWS_S3_IDENTITY_POOL_ID, AWS_S3_BUCKET_NAME } from "@env";
 import { FontAwesome } from "@expo/vector-icons";
 import styles from "./UserAvatarStyles";
 
-const imgOptions = {
+const imgOptions: ImagePicker.ImagePickerOptions = {
     mediaTypes: ImagePicker.MediaTypeOptions.All,
     allowsEditing: true,
     aspect: [3, 3],
@@ -25,6 +25,7 @@ const imgOptions = {
 function UserAvatar({ id }: { id: string }) {
     const [avatar, setAvatar] = useState<string>("");
 
+    // declare s3 client with cognito
     const client = new S3Client({
         region: AWS_S3_REGION,
         credentials: fromCognitoIdentityPool({
@@ -33,8 +34,8 @@ function UserAvatar({ id }: { id: string }) {
         }),
     });
 
-    const uploadToS3 = (arrayBuffer: object) => {
-        const bucketParams = {
+    const uploadToS3 = (arrayBuffer: Buffer) => {
+        const bucketParams: PutObjectCommandInput = {
             Bucket: AWS_S3_BUCKET_NAME,
             Key: id,
             Body: arrayBuffer,
@@ -42,8 +43,9 @@ function UserAvatar({ id }: { id: string }) {
         };
 
         client.send(new PutObjectCommand(bucketParams)).then((data) => {
-            // console.log(data);
-            return;
+            if (data) {
+                return;
+            }
         }).catch((e) => {
             console.log(e);
         });
@@ -75,7 +77,7 @@ function UserAvatar({ id }: { id: string }) {
                 encoding: "base64",
             });
             if (imageBase64 && imageURI) {
-                const arrayBuffer = Buffer.from(imageBase64, "base64");
+                const arrayBuffer: Buffer = Buffer.from(imageBase64, "base64");
                 uploadToS3(arrayBuffer);
                 setAvatar(imageURI);
             }
