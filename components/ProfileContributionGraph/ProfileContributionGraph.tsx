@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View } from "../Themed";
 import { Dimensions } from "react-native";
 import { ContributionGraph } from "react-native-chart-kit";
 

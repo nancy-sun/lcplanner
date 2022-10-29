@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Pressable, ActivityIndicator, Alert } from "react-native";
+import { Text, TextInput, Pressable, ActivityIndicator, Alert } from "react-native";
+import { View } from "../Themed";
 import { useNavigation } from "@react-navigation/native";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN_MUTATION } from "../../graphql/mutations";

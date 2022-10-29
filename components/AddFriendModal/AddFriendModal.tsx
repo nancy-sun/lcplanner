@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Modal, Text, Pressable, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Alert } from "react-native";
+import { Modal, Text, Pressable, TextInput, TouchableOpacity, TouchableWithoutFeedback, Alert } from "react-native";
+import { View } from "../Themed";
 import { useMutation } from "@apollo/client";
 import { ADD_TASKS_LIST_USER_MUTATION } from "../../graphql/mutations";
 import styles from "./AddFriendModalStyles";

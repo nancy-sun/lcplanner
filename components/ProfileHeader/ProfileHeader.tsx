@@ -1,4 +1,5 @@
-import { View, Text } from "react-native";
+import { Text } from "react-native";
+import { View } from "../Themed";
 import React from "react";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import styles from "./ProfileHeaderStyles";

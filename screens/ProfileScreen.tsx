@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Alert, ActivityIndicator, Dimensions } from "react-native";
+import { StyleSheet, Alert, ActivityIndicator } from "react-native";
+import { View } from "../components/Themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from '@react-navigation/native';
 import jwt_decode from "jwt-decode";

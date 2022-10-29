@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Image, TouchableHighlight, } from "react-native";
+import { Image, TouchableHighlight } from "react-native";
+import { View } from "../Themed";
 import { Buffer } from "buffer";
 import "react-native-url-polyfill/auto";
 import "react-native-get-random-values";

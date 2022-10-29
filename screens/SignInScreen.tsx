@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import { View } from "../components/Themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SignInForm from "../components/SignInForm/SignInForm";
 

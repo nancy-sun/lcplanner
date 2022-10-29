@@ -1,7 +1,8 @@
-import { View } from "react-native";
 import React, { useEffect } from "react";
+import { View } from "../Themed";
 import { Calendar } from "react-native-calendars";
 import styles from "./TasksCalendarStyles";
+import { Theme } from "react-native-calendars/src/types";
 
 interface TasksCalendarProps {
     setShowTasks: (day: string) => void,
@@ -38,7 +39,7 @@ function TasksCalendar({ setShowTasks, showTasks, dateMarks }: TasksCalendarProp
     );
 };
 
-const calendarTheme = {
+const calendarTheme: Theme = {
     backgroundColor: "#ffffff",
     arrowColor: "#F09B2A",
     calendarBackground: "#ffffff",

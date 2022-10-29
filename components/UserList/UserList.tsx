@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View, Alert, ActivityIndicator } from "react-native";
+import { FlatList, Alert, ActivityIndicator } from "react-native";
+import { View } from "../Themed";
 import { useQuery } from "@apollo/client";
 import UserItem from "../UserItem/UserItem";
 import { GET_ACCESS_TASKS_LIST_QUERY } from "../../graphql/queries";
