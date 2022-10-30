@@ -7,7 +7,7 @@ import styles from "./ProfileHeaderStyles";
 function ProfileHeader({ userID, username }: { userID: string, username: string }) {
     return (
         <View style={styles.container}>
-            <UserAvatar id={userID} />
+            <UserAvatar id={userID} editable={true} />
             <Text style={styles.name}>
                 {username}
             </Text>

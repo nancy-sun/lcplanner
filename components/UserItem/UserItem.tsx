@@ -3,17 +3,21 @@ import { Text, Pressable } from "react-native";
 import { View } from "../Themed";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import UserAvatar from "../UserAvatar/UserAvatar";
 import styles from "./UserItemStyles";
 interface UserItemProps {
     user: {
         id: string,
+        tasks: Array<any>,
         owner: {
-            name: String
+            name: string,
+            id: string,
         }
     }
 };
 
 function UserItem({ user }: UserItemProps) {
+    console.log(user.id)
 
     const navigate = useNavigation();
 
@@ -24,9 +28,7 @@ function UserItem({ user }: UserItemProps) {
     return (
         <Pressable onPress={handlePress}>
             <View style={styles.container}>
-                <View style={styles.iconContainer}>
-                    <FontAwesome name="user" size={24} color="#F09B2A" />
-                </View>
+                <UserAvatar id={user.owner.id} editable={false} />
                 <Text style={styles.username}>{user.owner.name}</Text>
             </View>
         </Pressable>

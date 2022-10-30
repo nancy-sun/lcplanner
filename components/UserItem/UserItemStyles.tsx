@@ -13,10 +13,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         height: 25,
         paddingLeft: 5
-    },
-    iconContainer: {
-        width: 25,
-        height: 25,
     }
 });
 

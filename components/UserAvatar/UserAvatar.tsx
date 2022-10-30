@@ -23,7 +23,7 @@ const imgOptions: ImagePicker.ImagePickerOptions = {
 };
 
 // get avatar from s3 based on user id
-function UserAvatar({ id }: { id: string }) {
+function UserAvatar({ id, editable }: { id: string; editable: boolean }) {
     const [avatar, setAvatar] = useState<string>("");
 
     // declare s3 client with cognito
@@ -92,16 +92,27 @@ function UserAvatar({ id }: { id: string }) {
     }, [id]);
 
     return (
-        <View style={styles.container}>
-            <TouchableHighlight activeOpacity={0.8} underlayColor="#b7b7b7"
-                style={styles.container} onPress={() => uploadAvatar()} >
-                {avatar ?
-                    <Image style={styles.avatar} source={{ uri: avatar, scale: 1 }} resizeMode="cover" /> :
-                    <View style={styles.defaultAvatar}>
-                        <FontAwesome name="user" size={45} color="#F09B2A" />
-                    </View>
-                }
-            </TouchableHighlight>
+        <View style={editable ? styles.container : styles.staticContainer}>
+            {editable ?
+                (<TouchableHighlight activeOpacity={0.8} underlayColor="#b7b7b7"
+                    style={styles.container} onPress={() => uploadAvatar()} >
+                    {avatar ?
+                        <Image style={styles.avatar} source={{ uri: avatar, scale: 1 }} resizeMode="cover" /> :
+                        <View style={styles.defaultAvatar}>
+                            <FontAwesome name="user" size={45} color="#F09B2A" />
+                        </View>
+                    }
+                </TouchableHighlight>)
+                :
+                (<View style={styles.staticContainer}>
+                    {avatar ?
+                        <Image style={styles.staticAvatar} source={{ uri: avatar, scale: 1 }} resizeMode="cover" /> :
+                        <View style={styles.staticDefaultAvatar}>
+                            <FontAwesome name="user" size={25} color="#F09B2A" />
+                        </View>
+                    }
+                </View>)
+            }
         </View>
     );
 };

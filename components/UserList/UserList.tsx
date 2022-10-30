@@ -30,7 +30,7 @@ function UserList() {
             <FlatList
                 data={users}
                 renderItem={({ item }) =>
-                    <UserItem user={item} key={item["id"]} />}
+                    <UserItem user={item} key={item.id} />}
                 style={styles.list}
             />
         </View>
