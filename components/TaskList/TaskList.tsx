@@ -15,7 +15,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
     const [tasks, setTasks] = useState<any>([]);
     const [tasksListID, setTasksListID] = useState<string>("");
     const [showTasks, setShowTasks] = useState<string>(""); // selected task date
-    const [dateMarks, setDateMarks] = useState<Array<string>>([]);
+    const [dateMarks, setDateMarks] = useState<Array<string>>([]); // array of dates
     const [showTasksList, setShowTasksList] = useState<Array<any>>([]);
     const [lastIdx, setLastIdx] = useState<number>(0);
 

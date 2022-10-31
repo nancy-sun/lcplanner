@@ -17,12 +17,10 @@ interface UserItemProps {
 };
 
 function UserItem({ user }: UserItemProps) {
-    console.log(user.id)
-
     const navigate = useNavigation();
 
     const handlePress = () => {
-        navigate.navigate("ViewOnlyTasks", { id: user.id });
+        navigate.navigate("ViewOnlyTasks", { id: user.owner.id });
     };
 
     return (
