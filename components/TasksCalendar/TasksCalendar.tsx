@@ -14,7 +14,7 @@ function TasksCalendar({ setShowTasks, showTasks, dateMarks }: TasksCalendarProp
 
     useEffect(() => {
         let date = new Date();
-        setShowTasks(date.toLocaleDateString("en-CA"))
+        setShowTasks(date.toLocaleDateString("en-CA"));
     }, []);
 
     return (
@@ -32,8 +32,9 @@ function TasksCalendar({ setShowTasks, showTasks, dateMarks }: TasksCalendarProp
                 theme={calendarTheme}
                 markedDates={{
                     [showTasks]: { selected: true },
-                    [dateMarks]: { marked: true }
+                    ...dateMarks
                 }}
+                enableSwipeMonths
             />
         </View>
     );

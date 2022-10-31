@@ -15,14 +15,14 @@ function TaskList({ data, loading }: TaskListQueryProps) {
     const [tasks, setTasks] = useState<any>([]);
     const [tasksListID, setTasksListID] = useState<string>("");
     const [showTasks, setShowTasks] = useState<string>(""); // selected task date
-    const [dateMarks, setDateMarks] = useState<Array<string>>([]); // array of dates
+    const [dateMarks, setDateMarks] = useState<any>({}); // object for dot marks
     const [showTasksList, setShowTasksList] = useState<Array<any>>([]);
     const [lastIdx, setLastIdx] = useState<number>(0);
 
     const getDateMarks = (tasks: Array<any>) => {
         const dates = dateMarks;
         tasks.forEach((task) => {
-            dates.push(task.date);
+            dates[task.date] = { marked: true }
         });
         setDateMarks(dates);
     };
