@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Alert, ActivityIndicator } from "react-native";
 import { View } from "../components/Themed";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import jwt_decode from "jwt-decode";
 import { useLazyQuery } from "@apollo/client";
 import { GET_LC_DATA_QUERY, GET_USER_QUERY } from "../graphql/queries";

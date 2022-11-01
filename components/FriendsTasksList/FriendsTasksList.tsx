@@ -1,8 +1,8 @@
-import React from 'react'
-import { Text, FlatList } from 'react-native';
-import FriendsTasksItem from '../FriendsTasksItem/FriendsTasksItem';
+import React from "react"
+import { FlatList } from "react-native";
 import { View } from "../Themed";
-import styles from './FriendsTasksListStyles';
+import FriendsTasksItem from "../FriendsTasksItem/FriendsTasksItem";
+import styles from "./FriendsTasksListStyles";
 
 interface FriendsTasksListProps {
     showTasksList: Array<Task>,
@@ -14,7 +14,6 @@ interface Task {
 };
 
 function FriendsTasksList({ showTasksList }: FriendsTasksListProps) {
-
     return (
         <View style={styles.container}>
             <FlatList

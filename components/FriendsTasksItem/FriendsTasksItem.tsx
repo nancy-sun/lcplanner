@@ -1,8 +1,8 @@
-import React from 'react'
-import { Text, FlatList } from 'react-native';
-import Checkbox from '../Checkbox/Checkbox';
+import React from "react";
+import { Text } from "react-native";
+import Checkbox from "../Checkbox/Checkbox";
 import { View } from "../Themed";
-import styles from './FriendsTasksItemStyles';
+import styles from "./FriendsTasksItemStyles";
 
 interface FriendsTasksItemProps {
     task: {
@@ -12,7 +12,6 @@ interface FriendsTasksItemProps {
 }
 
 function FriendsTasksItem({ task }: FriendsTasksItemProps) {
-
     return (
         <View style={styles.container}>
             <Checkbox isChecked={task.isCompleted} onPress={() => { }} />
