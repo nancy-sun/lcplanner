@@ -9,15 +9,22 @@ LCPLanner is a full-stack mobile app for leetcode users to keep a record of prob
 
 ## Installation  
       
-Download / clone source code locally   
+### Set up AWS SDK
+[Setup S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html)
+### Download / clone source code locally   
 ```$ git clone https://github.com/nancy-sun/lcplanner```
    
-Install dependencies   
+### Install dependencies   
 ```$ npm install```   
    
-Start running   
+### Create .env:   
+Please refer to `example.env` for details
+  
+### Start running   
 ```$ npm start```
       
+
+
 &nbsp;
    
 ## Tech Stack  
