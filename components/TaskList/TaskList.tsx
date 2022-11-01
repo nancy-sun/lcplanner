@@ -4,6 +4,7 @@ import { ActivityIndicator, FlatList, SafeAreaView } from "react-native";
 import TaskItem from "../TaskItem/TaskItem";
 import styles from "./TaskListStyles";
 import TasksCalendar from "../TasksCalendar/TasksCalendar";
+import { getTasksByDate } from "../../utils/utils";
 
 /* list of tasks in a day */
 interface TaskListQueryProps {
@@ -27,10 +28,6 @@ function TaskList({ data, loading }: TaskListQueryProps) {
         setDateMarks(dates);
     };
 
-    const getTasksByDate = (tasks: Array<any>) => {
-        return tasks.filter((task) => task.date === showTasks);
-    };
-
     useEffect(() => {
         getDateMarks(tasks);
     }, [tasks]);
@@ -43,7 +40,7 @@ function TaskList({ data, loading }: TaskListQueryProps) {
     }, [data]);
 
     useEffect(() => {
-        const dailyTasks = getTasksByDate(tasks);
+        const dailyTasks = getTasksByDate(tasks, showTasks);
         if (dailyTasks.length !== showTasks.length || dailyTasks[dailyTasks.length - 1]) {
             dailyTasks.push({});
         }

@@ -7,7 +7,7 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 import styles from "./UserItemStyles";
 interface UserItemProps {
     user: {
-        id: string,
+        id: string, // taskslist id
         tasks: Array<any>,
         owner: {
             name: string,
@@ -20,7 +20,7 @@ function UserItem({ user }: UserItemProps) {
     const navigate = useNavigation();
 
     const handlePress = () => {
-        navigate.navigate("ViewOnlyTasks", { id: user.owner.id });
+        navigate.navigate("ViewOnlyTasks", { id: user.id, username: user.owner.name });
     };
 
     return (

@@ -28,6 +28,7 @@ Start running
 - GraphQL
 - MongoDB
 - AWS S3
+- AWS Cognito
 - JWT
    
 &nbsp;

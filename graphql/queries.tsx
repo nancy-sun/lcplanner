@@ -29,7 +29,7 @@ const MY_TASKS_LIST_QUERY = gql`query MyTasksList {
     }
 }`;
 
-// get single taskslist by id, to view friend's tasks list
+// get single taskslist by taskslist id, to view friend's tasks list
 const GET_TASK_LIST_QUERY = gql`query GetTasksList($id: ID!) {
     getTasksList(id: $id) {
         recap

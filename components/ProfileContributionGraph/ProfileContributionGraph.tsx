@@ -2,9 +2,13 @@ import React from "react";
 import { View } from "../Themed";
 import { Dimensions } from "react-native";
 import { ContributionGraph } from "react-native-chart-kit";
+import { ContributionChartValue } from "react-native-chart-kit/dist/contribution-graph/ContributionGraph";
 
 function ProfileContributionGraph({ lcCalendarStat }: { lcCalendarStat: Array<any> }) {
     const screenWidth = Dimensions.get("window").width;
+
+    const handleToolTip: any = {}
+
     return (
         <View>
             {lcCalendarStat &&
@@ -20,7 +24,7 @@ function ProfileContributionGraph({ lcCalendarStat }: { lcCalendarStat: Array<an
                         marginLeft: -22
                     }}
                     chartConfig={chartConfig}
-                // accessor={}
+                    tooltipDataAttrs={(value) => handleToolTip}
                 />
             }
         </View>

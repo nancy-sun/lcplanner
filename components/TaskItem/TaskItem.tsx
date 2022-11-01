@@ -155,7 +155,8 @@ function TaskItem({ task, tasksListID, index, tasksDate, lastIdx, showTasksList,
     return (
         <View style={styles.container}>
             <Checkbox isChecked={checked} onPress={handleCheckBoxPress} />
-            <TextInput blurOnSubmit
+            <TextInput
+                blurOnSubmit
                 ref={inputRef}
                 style={styles.textInput}
                 value={title}

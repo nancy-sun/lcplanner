@@ -21,7 +21,7 @@ export type RootStackParamList = {
     About: undefined;
     NotFound: undefined;
     Tasks: undefined;
-    ViewOnlyTasks: { id: string };
+    ViewOnlyTasks: { id: string, username: string };
     Users: undefined;
     Profile: undefined;
 };
