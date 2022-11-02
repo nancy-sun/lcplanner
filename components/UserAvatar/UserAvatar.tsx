@@ -5,7 +5,7 @@ import { Buffer } from "buffer";
 import "react-native-url-polyfill/auto";
 import "react-native-get-random-values";
 import * as ImagePicker from "expo-image-picker";
-import { S3Client, GetObjectCommand, PutObjectCommand, PutObjectCommandInput } from "@aws-sdk/client-s3";
+import { S3Client, GetObjectCommand, PutObjectCommand, PutObjectCommandInput, HeadObjectCommand, HeadObjectCommandInput } from "@aws-sdk/client-s3";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
 import * as FileSystem from "expo-file-system";
@@ -24,7 +24,7 @@ const imgOptions: ImagePicker.ImagePickerOptions = {
 
 // get avatar from s3 based on user id
 function UserAvatar({ id, editable }: { id: string; editable: boolean }) {
-    const [avatar, setAvatar] = useState<string>("");
+    const [avatar, setAvatar] = useState<string>();
 
     // declare s3 client with cognito
     const client = new S3Client({
@@ -36,14 +36,14 @@ function UserAvatar({ id, editable }: { id: string; editable: boolean }) {
     });
 
     const uploadToS3 = (arrayBuffer: Buffer) => {
-        const bucketParams: PutObjectCommandInput = {
+        const putBucketParams: PutObjectCommandInput = {
             Bucket: AWS_S3_BUCKET_NAME,
             Key: id,
             Body: arrayBuffer,
             ContentType: "multipart/form-data"
         };
 
-        client.send(new PutObjectCommand(bucketParams)).then((data) => {
+        client.send(new PutObjectCommand(putBucketParams)).then((data) => {
             if (data) {
                 return;
             }
@@ -52,11 +52,29 @@ function UserAvatar({ id, editable }: { id: string; editable: boolean }) {
         });
     };
 
+    // check user avatar exist in s3 bucket
+    const doesAvatarExist = async (bucketParams: HeadObjectCommandInput) => {
+        const command = new HeadObjectCommand(bucketParams);
+        try {
+            const response = await client.send(command);
+            if (response) {
+                return true
+            }
+        } catch (err) {
+            console.log("Error", err);
+            return false;
+        }
+    };
+
     const getAvatarFromS3 = async () => {
         const bucketParams = {
             Bucket: AWS_S3_BUCKET_NAME,
             Key: id,
         };
+        if (!await doesAvatarExist(bucketParams)) {
+            return;
+        }
+
         try {
             const data = new GetObjectCommand(bucketParams);
             if (data) {
