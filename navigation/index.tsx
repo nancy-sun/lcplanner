@@ -55,7 +55,7 @@ function RootNavigator() {
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
             <Stack.Screen name="Tasks" component={TasksScreen} />
             <Stack.Screen name="Users" component={UsersScreen} />
-            <Stack.Screen name="ViewOnlyTasks" component={ViewOnlyTasksScreen} />
+            <Stack.Screen name="ViewOnlyTasks" component={ViewOnlyTasksScreen} options={({ route }) => ({ title: route.params.username })} />
 
             <Stack.Group screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen name="About" component={ModalScreen} />
