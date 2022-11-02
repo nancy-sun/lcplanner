@@ -50,8 +50,10 @@ Please refer to `example.env` for details
    
 &nbsp;
 
-## Prototype  
+## Prototype / Demo  
    
+<video src="./assets/lcplannerDemo.mp4"></video>
+
 &nbsp;
 
 ## Author  
