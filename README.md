@@ -27,8 +27,6 @@ Please refer to `example.env` for details
 ### Start running   
 ```$ npm start```
       
-
-
 &nbsp;
    
 ## Tech Stack  
@@ -55,7 +53,15 @@ Please refer to `example.env` for details
    
 https://user-images.githubusercontent.com/99620863/199389259-64b90e2a-c024-447c-abcd-b408804b70d4.mp4
 
+&nbsp;
 
+## Future Discussions
+- Add autocomplete of leetcode problems on task inputs for better user experience.
+- Allow users to set deadline for each task.
+- cache tasks data offline.
+- Add push notifications to remind users to complete tasks.
+- Include more information in the contribution graph.
+- Add passport.js login options.
 
 &nbsp;
 
