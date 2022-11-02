@@ -1,4 +1,5 @@
 # LCPlanner
+![logo](https://user-images.githubusercontent.com/99620863/199389829-651ec569-86ff-4d14-a1f1-107b66b619ba.svg)
 
 Backend repo: https://github.com/nancy-sun/lcplanner-server
 
